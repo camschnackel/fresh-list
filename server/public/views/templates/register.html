@@ -1,4 +1,61 @@
-<div class="container">
+<section>
+  <h1 class="brand">FreshList</h1>
+</section>
+<section layout="row" ng-cloak="" class="logReg">
+  <div flex="33"></div>
+  <md-content flex>
+    <form name="registerForm" ng-submit="lc.registerUser()">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" layout="column" layout-padding>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Register</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Name</label>
+          <input md-maxlength="30" required="" name="name" ng-model="lc.user.name" class="capInput">
+          <div class="hint">Tell us what we should call you!</div>
+          <div ng-messages="registerForm.name.$error">
+            <div ng-message="required">Name is required.</div>
+            <div ng-message="md-maxlength">Name has to be less than 30 characters long</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Email</label>
+          <input required="" name="email" type="email" ng-model="lc.user.email">
+          <div class="hint">You will use your email to log in</div>
+          <div ng-messages="registerForm.email.$error">
+            <div ng-message="required">Email is required.</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Password</label>
+          <input required="" type="password" name="password" ng-model="lc.user.password">
+          <div class="hint">Special characters and cases recommended</div>
+          <div ng-messages="registerForm.password.$error">
+            <div ng-message="required">Password is required</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Confirm Password</label>
+          <input required="lc.user.password" type="password" name="passwordCon" ng-model="lc.user.passwordConfirm">
+          <div class="hint">{{lc.confirmMessage}}</div>
+          <div ng-messages="registerForm.passwordCon.$error">
+            <div ng-message="required">Must confirm your password</div>
+          </div>
+        </md-input-container>
+        <div layout="row">
+          <md-button class="md-raised md-primary" flex="50" type="submit" name="submit">Submit</md-button>
+          <md-button class="md-raised md-primary" flex="50" href="/home">Go Back</md-button>
+        </div>
+        <h4 ng-if="lc.message != ''">{{lc.message}}</h4>
+      </md-card>
+    </form>
+  </md-content>
+  <div flex="33"></div>
+</section>
+
+<!-- <div class="container">
   <h1 class="lead">Register User</h1>
   <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
   <form ng-submit="lc.registerUser()">
@@ -14,4 +71,4 @@
     <a href="#home">Cancel</a>
   </form>
 
-</div>
+</div> -->

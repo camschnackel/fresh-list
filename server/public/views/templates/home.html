@@ -1,4 +1,37 @@
-<div class="container">
+<section>
+  <h1 class="brand">FreshList</h1>
+</section>
+<section layout="row" ng-cloak="" class="logReg">
+  <div flex="33"></div>
+  <md-content flex>
+    <form name="loginForm" ng-submit="lc.login()">
+      <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" layout="column" layout-padding>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Login</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Email</label>
+          <input required="" name="email" type="email" ng-model="lc.user.email">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm="">
+          <label>Password</label>
+          <input required="" type="password" name="password" ng-model="lc.user.password">
+        </md-input-container>
+        <div layout="row">
+          <md-button class="md-raised md-primary" flex="50" type="submit" name="submit">Sign In</md-button>
+          <md-button class="md-raised md-primary" flex="50" href="/register">Register</md-button>
+        </div>
+        <h4 ng-if="lc.message != ''">{{lc.message}}</h4>
+      </md-card>
+    </form>
+  </md-content>
+  <div flex="33"></div>
+</section>
+
+<!-- <section class="loginRegister">
+  <h1 id="logo">FreshList</h1>
   <h1 class="lead">Login</h1>
     <h1 class="lead alert alert-danger" role="alert" ng-if="lc.message != ''">{{lc.message}}</h2>
     <form ng-submit="lc.login()">
@@ -15,4 +48,4 @@
           <a href="#register">Register</a>
       </div>
     </form>
-</div>
+</section> -->

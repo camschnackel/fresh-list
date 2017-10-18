@@ -19,7 +19,8 @@ router.post('/', function(req, res, next) {
   recipes: {type: Array}
   */
     var userToSave = {
-      username : req.body.username,
+      name : req.body.name,
+      email : req.body.email,
       password : req.body.password
     };
 
