@@ -25,10 +25,10 @@ passport.deserializeUser(function(id, done) {
 // Called by middleware stack
 passport.use('local', new localStrategy({
   passReqToCallback: true,
-  usernameField: 'email'
-  }, function(req, email, password, done) {
+  usernameField: 'username'
+  }, function(req, username, password, done) {
     // mongoose stuff
-    User.findOne({email: email}, function(err, user) {
+    User.findOne({username: username}, function(err, user) {
       if(err) {
         throw err;
       }

@@ -6,7 +6,7 @@ var SALT_WORK_FACTOR = 10;
 // Mongoose Schema
 var UserSchema = new Schema({
     name: {type: String, required: true},
-    email: {type: String, required: true, index: {unique: true}},
+    username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true}
 });
 
@@ -47,4 +47,4 @@ UserSchema.methods.comparePassword = function(candidatePassword, callback) {
 };
 
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Users', UserSchema);

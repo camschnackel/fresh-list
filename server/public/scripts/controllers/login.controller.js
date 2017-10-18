@@ -4,20 +4,20 @@ myApp.controller('LoginController', function($http, $location, UserService) {
 
     vm.user = {
       name: '',
-      email: '',
+      username: '',
       password: ''
     };
     vm.message = '';
 
     vm.login = function() {
       console.log('LoginController -- login');
-      if(vm.user.email === '' || vm.user.password === '') {
+      if(vm.user.username === '' || vm.user.password === '') {
         vm.message = 'Enter your email and password!';
       } else {
         console.log('LoginController -- login -- sending to server...', vm.user);
-        delete vm.user.name;
+        // delete vm.user.name;
         $http.post('/', vm.user).then(function(response) {
-          if(response.data.email) {
+          if(response.data.username) {
             console.log('LoginController -- login -- success: ', response.data);
             // location works with SPA (ng-route)
             $location.path('/user'); // http://localhost:5000/#/user

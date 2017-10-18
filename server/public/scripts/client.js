@@ -13,7 +13,7 @@ myApp.config(function($routeProvider, $locationProvider) {
       templateUrl: '/views/templates/register.html',
       controller: 'LoginController as lc'
     })
-    .when('/user', {
+    .when('/pantry', {
       templateUrl: '/views/templates/user.html',
       controller: 'UserController as uc',
       resolve: {
@@ -22,7 +22,7 @@ myApp.config(function($routeProvider, $locationProvider) {
         }
       }
     })
-    .when('/info', {
+    .when('/recipes', {
       templateUrl: '/views/templates/info.html',
       controller: 'InfoController',
       resolve: {

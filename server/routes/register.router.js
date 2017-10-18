@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Users = require('../models/user.js');
+var User = require('../models/user.js');
 var path = require('path');
 
 
@@ -18,16 +18,26 @@ router.post('/', function(req, res, next) {
   password: {type: String, required: true},
   recipes: {type: Array}
   */
-    var userToSave = {
-      name : req.body.name,
-      email : req.body.email,
-      password : req.body.password
-    };
+    // var userToSave = {
+    //   name : req.body.name,
+    //   username : req.body.username,
+    //   password : req.body.password
+    // };
 
+    var newUser = new User ({
+      name: req.body.name,
+      username: req.body.username,
+      password: req.body.password
+    });
 
-    Users.create(userToSave, function(err, post) {
+    console.log('userToSave', newUser);
+    
+    // Users.create
+
+    newUser.save(function(err, post) {
       console.log('post /register -- User.create');
          if(err) {
+           console.log('err ->', err);
            console.log('post /register -- User.create -- failure');
            res.sendStatus(500);
          } else {
