@@ -7,7 +7,8 @@ var SALT_WORK_FACTOR = 10;
 var UserSchema = new Schema({
     name: {type: String, required: true},
     username: {type: String, required: true, index: {unique: true}},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    food: []
 });
 
 // Called before adding a new user to the DB. Encrypts password.

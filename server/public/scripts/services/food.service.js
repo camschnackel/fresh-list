@@ -2,43 +2,28 @@ myApp.service('FoodService', function ($http) {
     console.log('in FoodService');
     var self = this;
 
-    self.rentalsList = { homes: [] };
-    self.salesList = { homes: [] };
-    self.listing = {};
+    self.foodObj = {food: []};
 
-    self.getRentals = function () {
-        console.log('in getHomes');
+    self.getFood = function () {
+        console.log('in getFood');
         $http({
             method: 'GET',
-            url: '/housing/rentals'
+            url: '/pantry'
         }).then(function (response) {
-            self.rentalsList.homes = response.data;
-            console.log('self.rentalsList ->', self.rentalsList.homes);
-
+            console.log('response.data ->', response.data);
+            self.foodObj.food = response.data[0].food;
+            console.log('self.foodObj ->', self.foodObj);
+            
         })
     }
 
-    self.getSales = function () {
-        console.log('in getHomes');
-        $http({
-            method: 'GET',
-            url: '/housing/sales'
-        }).then(function (response) {
-            self.salesList.homes = response.data;
-            console.log('self.salesList ->', self.salesList.homes);
-
-        })
-    }
-
-    self.postListing = function (objToSend) {
-        console.log('in postListing');
-        $http({
+    self.postFood = function (objToSend) {
+        console.log('in postFood');
+        return $http({
             method: 'POST',
-            url: '/housing/listings',
+            url: '/pantry',
             data: objToSend
-        }).then(function (response) {
-
-        })
+        });
     }
 
 });
