@@ -1,6 +1,65 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div class="container">
-  <p>
-    In Info
-  </p>
-</div>
+<md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">Log Out {{rc.userObject.name}}</md-button>
+<h1 class="pgHead">Pantry</h1>
+<section layout="row">
+  <div flex="15"></div>
+  <div flex>
+    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" layout="column" layout-padding>
+      <table id="pantryTable" width="100%">
+        <thead>
+          <th id="smTh">Qty</th>
+          <th id="lgTh">Name</th>
+          <th id="smTh">Expires</th>
+          <!-- <th id="smTh"><md-button class="md-raised">Sort</md-button></th> -->
+          <th id="smTh">
+            <md-input-container>
+              <label>Sort</label>
+              <md-select ng-model="pc.sortMethod">
+                <md-option ng-value="date">
+                  Date
+                </md-option>
+                <md-option ng-value="date">
+                  Name
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </th>
+          <th id="smTh">
+            <md-button class="md-raised md-primary" ng-click="pc.addToggle=true" ng-show="!pc.addToggle">+</md-button>
+            <md-button class="md-raised md-warn" ng-click="pc.addToggle=false" ng-show="pc.addToggle">Cancel</md-button>
+          </th>
+        </thead>
+        <tbody id="pantryTbody">
+          <tr ng-show="pc.addToggle">
+            <td class="inputTd">
+              <md-input-container class="inputCon">
+                <input md-maxlength="20" required="" name="qty" ng-model="pc.pantryAdd.qty">
+              </md-input-container>
+            </td>
+            <td class"inputTd">
+              <md-input-container class="inputCon">
+                <input md-maxlength="50" required="" name="qty" ng-model="pc.pantryAdd.name">
+              </md-input-container>
+            </td>
+            <td class"inputTd">
+              <md-input-container class="inputCon">
+                <md-datepicker md-hide-icons="calendar" md-maxlength="50" required="" name="qty" ng-model="pc.pantryAdd.expiry" type="date"></md-datepicker>
+              </md-input-container>
+            </td>
+            <td class="inputTd" colspan="2">
+                <md-button class="md-raised md-primary" ng-click="pc.addItem()">Add to Pantry</md-button>
+            </td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Fruit</td>
+            <td>Tomorrow</td>
+            <td><md-button class="md-raised">Edit</md-button></td>
+            <td><md-button class="md-raised md-warn">Delete</md-button></td>
+          </tr>
+        </tbody>
+      </table>
+    </md-card>
+  </div>
+  <div flex="15"></div>
+</section>

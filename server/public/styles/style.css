@@ -9,3 +9,54 @@
 .capInput {
     text-transform: capitalize;
 }
+
+#appLogo {
+    font-weight: bold;
+}
+
+#logoDiv {
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    color: #5abc56;
+    float: left;
+    font-size: 50px;
+    padding: 7px 0px 7px 7px;
+}
+
+#logOut {
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+
+.pgHead {
+    margin: 15px 0px 15px 0px;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    font-size: 72px;
+}
+
+#smTh {
+    width: 15%;
+}
+
+#lgTh {
+    width: 40%;
+}
+
+td {
+    text-align: center;
+}
+
+#inputTd {
+    padding: 0;
+}
+
+.inputCon { 
+    margin: 0;
+}
+
+#pantryTbody tr {
+    border:1px solid #ccc;
+    border-width:1px 1px 0 0;
+}

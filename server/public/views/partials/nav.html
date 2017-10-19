@@ -1,29 +1,21 @@
+<div id="logoDiv">
+  FreshList
+</div>
 <md-content class="md-padding">
-  <md-nav-bar md-no-ink-bar="disableInkBar" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
-    <md-nav-item md-nav-href="" name="page1">
+  <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+    <!-- <md-nav-item md-nav-href="/pantry" name="logo" mdNoInkBar>
+      <span id="appLogo">       </span>
+    </md-nav-item> -->
+    <md-nav-item md-nav-href="/pantry" name="pantry">
       Pantry
     </md-nav-item>
-    <md-nav-item md-nav-click="goto('page2')" name="page2">
+    <md-nav-item md-nav-href="/recipes" name="recipes">
       Recipes
     </md-nav-item>
-    <md-nav-item md-nav-click="goto('page3')" name="page3">
+    <md-nav-item md-nav-href="/support" name="support">
       Support
     </md-nav-item>
-    <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
-    <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
-      You can also add options for the <code>ui-sref-opts</code> attribute.
-    <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
-        Page Six
-    </md-nav-item>
-     
   </md-nav-bar>
-  <div class="ext-content">
-    External content for `
-    <span>{{currentNavItem}}</span>`.
-  </div>
-
-  <md-checkbox ng-model="disableInkBar">Disable Ink Bar</md-checkbox>
-
 </md-content>
 
 <!-- <div class="navbar">
