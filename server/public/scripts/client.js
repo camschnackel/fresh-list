@@ -42,5 +42,5 @@ myApp.config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
 
   $locationProvider.html5Mode(true);
 
-  $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('green').dark();;
+  $mdThemingProvider.theme('default').primaryPalette('green').accentPalette('green');
 });

@@ -34,4 +34,19 @@ router.get('/', function (req, res) {
     })
 })
 
+router.delete('/:food', function (req, res) {
+    console.log('in pantry delete route with req.params ->', req.params);
+    
+    Food.update({ username: req.user.username }, { $pull: { food: { "name": req.params.food } } },
+        function (err, response) {
+            if (err) {
+                console.log('Food.update err ->', err);
+                res.sendStatus(500);
+            } else {
+                console.log('Delete Update Added');
+                res.sendStatus(201);
+            }
+    })
+})
+
 module.exports = router;

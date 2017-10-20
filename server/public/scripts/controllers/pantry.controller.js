@@ -4,10 +4,12 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
 
     var vm = this;
     vm.addToggle = false;
+    vm.editToggle = -1;
     vm.sortMethod = 'date';
     vm.userService = UserService;
     vm.userObject = UserService.userObject;
     vm.foodObj = FoodService.foodObj;
+    vm.dateDefault = new Date();
 
     console.log('vm.userObject ->', vm.userObject);
     
@@ -15,6 +17,12 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
         qty: '',
         name: '',
         expiry: new Date()
+    }
+
+    vm.pantryEdit = {
+        qty: '',
+        name: '',
+        expiry: ''
     }
 
     // function to clear input fields
@@ -42,14 +50,17 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     }
 
     //function to delete item from database
-    vm.editFood = function (index) {
-        console.log('in editFood with index ->', index);
+    vm.editFood = function (food) {
+        console.log('in editFood with food ->', food);
+        vm.editToggle = -1
 
     }
 
     //function to delete item from database
-    vm.deleteFood = function (index) {
-        console.log('in deleteFood with index ->', index);
-        
+    vm.deleteFood = function (food) {
+        console.log('in deleteFood with food ->', food);
+        FoodService.deleteFood(food).then(function () {
+            vm.getFood();
+        });
     }
 });

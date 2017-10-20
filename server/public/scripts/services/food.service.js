@@ -26,4 +26,18 @@ myApp.service('FoodService', function ($http) {
         });
     }
 
+    self.deleteFood = function (food) {
+        console.log('in deleteFood w/ ->', food);
+
+        objToSend = {food: ''};
+        objToSend.food = food;
+        console.log('objtoSend.food ->', objToSend.food);
+        
+        return $http({
+            method: 'DELETE',
+            url: '/pantry/' + objToSend.food
+            // data: objToSend
+        });
+    }
+
 });

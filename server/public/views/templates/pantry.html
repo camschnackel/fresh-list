@@ -4,7 +4,7 @@
 <section layout="row" ng-init="pc.getFood()">
   <div flex="15"></div>
   <div flex>
-    <md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" layout="column" layout-padding>
+    <md-card layout-padding>
       <table id="pantryTable" width="100%">
         <thead>
           <th id="smTh">Qty</th>
@@ -18,20 +18,20 @@
                 <md-option ng-value="date">
                   Date
                 </md-option>
-                <md-option ng-value="date">
+                <md-option ng-value="name">
                   Name
                 </md-option>
               </md-select>
             </md-input-container>
           </th>
           <th id="smTh">
-            <md-button class="md-raised md-primary" ng-click="pc.addToggle=true" ng-show="!pc.addToggle">+</md-button>
+            <md-button class="md-raised md-primary" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">+</md-button>
             <md-button class="md-raised md-warn" ng-click="pc.addToggle=false" ng-show="pc.addToggle">Cancel</md-button>
           </th>
         </thead>
         <tbody id="pantryTbody">
           <tr ng-show="pc.addToggle">
-            <form name="foodForm" ng-submit="pc.addItem()">
+            <form name="foodForm">
               <td class="inputTd">
                 <md-input-container class="inputCon">
                   <input md-maxlength="20" required="" name="qtyField" ng-model="pc.pantryAdd.qty">
@@ -53,11 +53,34 @@
             </form>
           </tr>
           <tr ng-repeat="food in pc.foodObj.food">
-            <td>{{food.qty}}</td>
-            <td>{{food.name}}</td>
-            <td>{{food.expiry}}</td>
-            <td><md-button class="md-raised" ng-click="pc.editFood($index)">Edit</md-button></td>
-            <td><md-button class="md-raised md-warn" ng-click="pc.deleteFood($index)">Delete</md-button></td>
+            <form name="foodForm" ng-submit="pc.SaveEditItem()">
+              <td ng-hide="pc.editToggle === $index">{{food.qty}}</td>
+              <td ng-show="pc.editToggle === $index">
+                <md-input-container class="inputCon">
+                  <input md-maxlength="20" required="" ng-value="food.qty" name="qtyField" ng-model="pc.pantryEdit.qty">
+                </md-input-container>
+              </td>
+              <td ng-hide="pc.editToggle === $index">{{food.name}}</td>
+              <td ng-show="pc.editToggle === $index">
+                <md-input-container class="inputCon">
+                  <input md-maxlength="50" required="" ng-value="food.name" name="qtyField" ng-model="pc.pantryEdit.name">
+                </md-input-container>
+              </td>
+              <td ng-hide="pc.editToggle === $index">{{food.expiry}}</td>
+              <td ng-show="pc.editToggle === $index">
+                <md-input-container class="inputCon">
+                  <md-datepicker valid="" md-hide-icons="calendar" required="" name="dateField" ng-model="pc.pantryEdit.expiry" ng-value="food.expiry"></md-datepicker>
+                </md-input-container>
+              </td>
+              <td ng-hide="pc.editToggle === $index"><md-button class="md-raised" ng-click="pc.editToggle = $index">Edit</md-button></td>
+              <td ng-show="pc.editToggle === $index">
+                <md-button class="md-raised md-primary" type="submit" name="submit" ng-click="pc.editFood(food.name)">Confirm</md-button>
+              </td>
+              <td ng-hide="pc.editToggle === $index"><md-button class="md-raised md-warn" ng-click="pc.deleteFood(food.name)">Delete</md-button></td>
+              <td ng-show="pc.editToggle === $index">
+                <md-button class="md-raised md-warn" ng-click="pc.editToggle = -1">Cancel</md-button>
+              </td>
+            </form>
           </tr>
         </tbody>
       </table>
