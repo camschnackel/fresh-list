@@ -51,8 +51,9 @@
                 </md-input-container>
               </td>
               <td class="inputTd centerText" colspan="2">
-                  <md-button class="md-icon-button" type="submit">
-                    <md-tooltip md-direction="bottom">Add to Pantry</md-tooltip><ng-md-icon icon="add_circle" style="fill: #4CAF50"></ng-md-icon>
+                  <md-button class="md-icon-button" type="submit" name="submit" form="foodAddForm">
+                    <md-tooltip md-direction="bottom">Add to Pantry</md-tooltip>
+                    <ng-md-icon icon="add_circle" style="fill: #4CAF50"></ng-md-icon>
                   </md-button>
                   <md-button class="md-icon-button" ng-click="pc.addToggle=false" ng-show="pc.addToggle">
                     <md-tooltip md-direction="bottom">Cancel</md-tooltip><ng-md-icon icon="cancel" style="fill: #F44336"></ng-md-icon>
@@ -89,7 +90,7 @@
                 <md-button class="md-raised md-primary" type="submit" name="submit" ng-click="pc.editFood(food.name)">Confirm</md-button>
               </td> -->
               <td ng-hide="pc.editToggle === $index" class="centerText">
-                <md-button class="md-icon-button" ng-click="pc.recipeSuggest(food.name)">
+                <md-button class="md-icon-button" ng-click="pc.recipeSuggest($event, food.name)">
                   <md-tooltip md-direction="bottom">Recipe Suggestion</md-tooltip><ng-md-icon icon="restaurant" style="fill: #FF9800"></ng-md-icon>
                 </md-button>
                 <md-button class="md-icon-button" ng-click="pc.editToggle = $index">

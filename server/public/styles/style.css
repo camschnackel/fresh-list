@@ -1,73 +1,73 @@
 .brand {
-    text-align: center;
-    font-size: 82px;
-    color: #5abc56;
-    margin-top: 15px;
-    margin-bottom: 15px;
+  text-align: center;
+  font-size: 82px;
+  color: #5abc56;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .capInput {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .centerText {
-    text-align: center;
+  text-align: center;
 }
 
 #appLogo {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 #logoDiv {
-    font-family: Helvetica, sans-serif;
-    font-weight: bold;
-    color: #5abc56;
-    float: left;
-    font-size: 50px;
-    padding: 7px 0px 7px 7px;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: #5abc56;
+  float: left;
+  font-size: 50px;
+  padding: 7px 0px 7px 7px;
 }
 
 #logOut {
-    position: absolute;
-    top: 5px;
-    right: 0;
+  position: absolute;
+  top: 5px;
+  right: 0;
 }
 
 .pgHead {
-    margin: 15px 0px 15px 0px;
-    font-family: Helvetica, sans-serif;
-    text-align: center;
-    font-size: 72px;
+  margin: 15px 0px 15px 0px;
+  font-family: Helvetica, sans-serif;
+  text-align: center;
+  font-size: 72px;
 }
 
 #smTh {
-    width: 15%;
-    text-align: left;
+  width: 15%;
+  text-align: left;
 }
 
 #lgTh {
-    width: 40%;
-    text-align: left;
+  width: 40%;
+  text-align: left;
 }
 
 #btTh {
-    width: 15%;
-    text-align: center;
+  width: 15%;
+  text-align: center;
 }
 
 #inputTd {
-    padding: 0;
+  padding: 0;
 }
 
-.inputCon { 
-    margin: 0;
+.inputCon {
+  margin: 0;
 }
 
 #pantryTbody tr {
-    height: 64px;
+  height: 64px;
 }
 
 .inputRow {
-    border-left: 1px solid #4CAF50;
-    border-right: 1px solid #4CAF50;
+  border-left: 1px solid #4CAF50;
+  border-right: 1px solid #4CAF50;
 }
