@@ -5,7 +5,7 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     var vm = this;
     vm.addToggle = false;
     vm.editToggle = -1;
-    vm.sortMethod = 'date';
+    vm.sortMethod = '';
     vm.userService = UserService;
     vm.userObject = UserService.userObject;
     vm.foodObj = FoodService.foodObj;
@@ -20,9 +20,40 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     }
 
     vm.pantryEdit = {
+        food: '',
         qty: '',
         name: '',
         expiry: ''
+    }
+
+    vm.sort = function () {
+        if (vm.sortMethod === 'date') {
+            console.log('Sort by Date!');
+            vm.sortByDate();
+        } else {
+            console.log('Sort by Name!');
+            FoodService.foodObj.food.sort();
+        }
+    }
+
+    vm.sortByDate = function () {
+
+        for (var i = 0; i < FoodService.foodObj.food.length; i++) {
+            FoodService.foodObj.food[i].dif = dateDif(FoodService.foodObj.food[i].expiry);
+            console.log('FoodService.foodObj.food[i].dif ->', FoodService.foodObj.food[i].dif)
+        }
+
+        var dateDif = function (date) {
+        var date1 = new Date();
+        var date2 = new Date(date);
+        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+        return diffDays;
+        }
+
+        FoodService.foodObj.food.sort(function (a, b) { return a - b });
+        console.log('FoodService.foodObj.food after sort ->', FoodService.foodObj.food);
+        
     }
 
     // function to clear input fields
@@ -30,6 +61,13 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
         vm.pantryAdd.qty = '';
         vm.pantryAdd.name = '';
         vm.pantryAdd.expiry = new Date();
+    }
+
+    vm.resetEdit = function () {
+        vm.pantryAdd.food = '';
+        vm.pantryAdd.qty = '';
+        vm.pantryAdd.name = '';
+        vm.pantryAdd.expiry = '';
     }
 
     // function to get food items from database
@@ -52,8 +90,14 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     //function to delete item from database
     vm.editFood = function (food) {
         console.log('in editFood with food ->', food);
-        vm.editToggle = -1
-
+        vm.editToggle = -1;
+        vm.pantryEdit.food = food;
+        vm.pantryEdit.expiry = $filter('date')(vm.pantryEdit.expiry, "MM/dd/yyyy");
+        FoodService.putFood(vm.pantryEdit)
+        .then(function () {
+            vm.resetEdit();
+            vm.getFood();
+        })
     }
 
     //function to delete item from database

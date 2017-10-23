@@ -14,7 +14,7 @@
           <th id="smTh">
             <md-input-container>
               <label>Sort</label>
-              <md-select ng-model="pc.sortMethod">
+              <md-select ng-model="pc.sortMethod" ng-change="pc.sort()">
                 <md-option ng-value="date">
                   Date
                 </md-option>
@@ -48,7 +48,7 @@
                 </md-input-container>
               </td>
               <td class="inputTd" colspan="2">
-                  <md-button class="md-raised md-primary" ng-click="pc.addItem()" type="submit" name="submit">Add to Pantry</md-button>
+                  <md-button class="md-raised md-primary" ng-click="pc.addToggle=false; pc.addItem()" type="submit" name="submit">Add to Pantry</md-button>
               </td>
             </form>
           </tr>
@@ -57,19 +57,23 @@
               <td ng-hide="pc.editToggle === $index">{{food.qty}}</td>
               <td ng-show="pc.editToggle === $index">
                 <md-input-container class="inputCon">
-                  <input md-maxlength="20" required="" ng-value="food.qty" name="qtyField" ng-model="pc.pantryEdit.qty">
+                  <label>{{food.qty}}</label>
+                  <input md-maxlength="20" required="" name="qtyField" ng-model="pc.pantryEdit.qty">
+                  <!-- ng-value="food.qty" -->
                 </md-input-container>
               </td>
               <td ng-hide="pc.editToggle === $index">{{food.name}}</td>
               <td ng-show="pc.editToggle === $index">
                 <md-input-container class="inputCon">
-                  <input md-maxlength="50" required="" ng-value="food.name" name="qtyField" ng-model="pc.pantryEdit.name">
+                  <label>{{food.name}}</label>
+                  <input md-maxlength="50" required="" name="qtyField" ng-model="pc.pantryEdit.name">
                 </md-input-container>
               </td>
               <td ng-hide="pc.editToggle === $index">{{food.expiry}}</td>
               <td ng-show="pc.editToggle === $index">
                 <md-input-container class="inputCon">
-                  <md-datepicker valid="" md-hide-icons="calendar" required="" name="dateField" ng-model="pc.pantryEdit.expiry" ng-value="food.expiry"></md-datepicker>
+                  <label>{{food.expiry}}</label>
+                  <md-datepicker valid="" md-hide-icons="calendar" required="" name="dateField" ng-model="pc.pantryEdit.expiry"></md-datepicker>
                 </md-input-container>
               </td>
               <td ng-hide="pc.editToggle === $index"><md-button class="md-raised" ng-click="pc.editToggle = $index">Edit</md-button></td>

@@ -26,6 +26,15 @@ myApp.service('FoodService', function ($http) {
         });
     }
 
+    self.putFood = function (objToSend) {
+        console.log('in putFood w/ objToSend ->', objToSend);
+        return $http({
+            method: 'PUT',
+            url: '/pantry',
+            data: objToSend
+        });
+    }
+
     self.deleteFood = function (food) {
         console.log('in deleteFood w/ ->', food);
 
