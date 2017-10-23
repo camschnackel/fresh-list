@@ -7,22 +7,24 @@
     <md-card layout-padding>
       <table id="pantryTable" width="100%">
         <thead>
-          <th id="smTh">Qty</th>
-          <th id="lgTh">Name</th>
-          <th id="smTh">Expires</th>
+          <th id="smTh">
+            <md-button ng-show="pc.sortMethod!=='qty'" ng-click="pc.sort('qty')">Qty</md-button>
+            <md-button ng-show="pc.sortMethod=='qty' && pc.reverse == true" class="md-primary md-hue-1" ng-click="pc.sort('qty')">Qty<ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon></md-button>
+            <md-button ng-show="pc.sortMethod=='qty' && pc.reverse == false" class="md-primary md-hue-1" ng-click="pc.sort('qty')">Qty<ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon></md-button>
+          </th>
+          <th id="lgTh">
+            <md-button ng-show="pc.sortMethod!=='name'" ng-click="pc.sort('name')">Name</md-button>
+            <md-button ng-show="pc.sortMethod=='name' && pc.reverse == true" class="md-primary md-hue-1" ng-click="pc.sort('name')">Name<ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon></md-button>
+            <md-button ng-show="pc.sortMethod=='name' && pc.reverse == false" class="md-primary md-hue-1" ng-click="pc.sort('name')">Name<ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon></md-button>
+          </th>
+          <th id="smTh">
+            <md-button ng-show="pc.sortMethod!=='expiry'" ng-click="pc.sort('expiry')">Expiry</md-button>
+            <md-button ng-show="pc.sortMethod=='expiry' && pc.reverse == true" class="md-primary md-hue-1" ng-click="pc.sort('expiry')">Expiry<ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon></md-button>
+            <md-button ng-show="pc.sortMethod=='expiry' && pc.reverse == false" class="md-primary md-hue-1" ng-click="pc.sort('expiry')">Expiry<ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon></md-button>
+          </th>
           <!-- <th id="smTh"><md-button class="md-raised">Sort</md-button></th> -->
           <th id="smTh">
-            <md-input-container>
-              <label>Sort</label>
-              <md-select ng-model="pc.sortMethod" ng-change="pc.sort()">
-                <md-option ng-value="date">
-                  Date
-                </md-option>
-                <md-option ng-value="name">
-                  Name
-                </md-option>
-              </md-select>
-            </md-input-container>
+            
           </th>
           <th id="smTh">
             <md-button class="md-raised md-primary" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">+</md-button>
@@ -52,7 +54,7 @@
               </td>
             </form>
           </tr>
-          <tr ng-repeat="food in pc.foodObj.food">
+          <tr ng-repeat="food in pc.foodObj.food | orderBy:pc.sortMethod:pc.reverse">
             <form name="foodForm" ng-submit="pc.SaveEditItem()">
               <td ng-hide="pc.editToggle === $index">{{food.qty}}</td>
               <td ng-show="pc.editToggle === $index">
@@ -76,11 +78,11 @@
                   <md-datepicker valid="" md-hide-icons="calendar" required="" name="dateField" ng-model="pc.pantryEdit.expiry"></md-datepicker>
                 </md-input-container>
               </td>
-              <td ng-hide="pc.editToggle === $index"><md-button class="md-raised" ng-click="pc.editToggle = $index">Edit</md-button></td>
+              <td ng-hide="pc.editToggle === $index"><md-button class="md-icon-button" ng-click="pc.editToggle = $index"><ng-md-icon icon="more_vert"></ng-md-icon></md-button></td>
               <td ng-show="pc.editToggle === $index">
                 <md-button class="md-raised md-primary" type="submit" name="submit" ng-click="pc.editFood(food.name)">Confirm</md-button>
               </td>
-              <td ng-hide="pc.editToggle === $index"><md-button class="md-raised md-warn" ng-click="pc.deleteFood(food.name)">Delete</md-button></td>
+              <td ng-hide="pc.editToggle === $index"><md-button class="md-icon-button" ng-click="pc.deleteFood(food.name)"><ng-md-icon icon="delete" style="fill: red"></ng-md-icon></md-button></td>
               <td ng-show="pc.editToggle === $index">
                 <md-button class="md-raised md-warn" ng-click="pc.editToggle = -1">Cancel</md-button>
               </td>

@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngMessages']);
+var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngMdIcons']);
 /// Routes ///
 myApp.config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
   $locationProvider.hashPrefix('');

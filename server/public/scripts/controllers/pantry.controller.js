@@ -5,7 +5,8 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     var vm = this;
     vm.addToggle = false;
     vm.editToggle = -1;
-    vm.sortMethod = '';
+    vm.sortMethod = 'expiry';
+    vm.reverse = false;
     vm.userService = UserService;
     vm.userObject = UserService.userObject;
     vm.foodObj = FoodService.foodObj;
@@ -16,7 +17,7 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     vm.pantryAdd = {
         qty: '',
         name: '',
-        expiry: new Date()
+        expiry: new Date(),
     }
 
     vm.pantryEdit = {
@@ -26,14 +27,9 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
         expiry: ''
     }
 
-    vm.sort = function () {
-        if (vm.sortMethod === 'date') {
-            console.log('Sort by Date!');
-            vm.sortByDate();
-        } else {
-            console.log('Sort by Name!');
-            FoodService.foodObj.food.sort();
-        }
+    vm.sort = function (method) {
+        vm.reverse = (vm.sortMethod === method) ? !vm.reverse : false;
+        vm.sortMethod = method;
     }
 
     vm.sortByDate = function () {
