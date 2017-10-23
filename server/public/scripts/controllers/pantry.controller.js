@@ -32,26 +32,6 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
         vm.sortMethod = method;
     }
 
-    vm.sortByDate = function () {
-
-        for (var i = 0; i < FoodService.foodObj.food.length; i++) {
-            FoodService.foodObj.food[i].dif = dateDif(FoodService.foodObj.food[i].expiry);
-            console.log('FoodService.foodObj.food[i].dif ->', FoodService.foodObj.food[i].dif)
-        }
-
-        var dateDif = function (date) {
-        var date1 = new Date();
-        var date2 = new Date(date);
-        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        return diffDays;
-        }
-
-        FoodService.foodObj.food.sort(function (a, b) { return a - b });
-        console.log('FoodService.foodObj.food after sort ->', FoodService.foodObj.food);
-        
-    }
-
     // function to clear input fields
     vm.resetItems = function () {
         vm.pantryAdd.qty = '';
@@ -60,10 +40,10 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     }
 
     vm.resetEdit = function () {
-        vm.pantryAdd.food = '';
-        vm.pantryAdd.qty = '';
-        vm.pantryAdd.name = '';
-        vm.pantryAdd.expiry = '';
+        vm.pantryEdit.food = '';
+        vm.pantryEdit.qty = '';
+        vm.pantryEdit.name = '';
+        vm.pantryEdit.expiry = '';
     }
 
     // function to get food items from database
@@ -74,6 +54,7 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
 
     // function to add new food item to database
     vm.addItem = function () {
+        pc.addToggle = false;
         vm.pantryAdd.expiry = $filter('date')(vm.pantryAdd.expiry, "MM/dd/yyyy");
         console.log('addItem clicked! vm.pantryAdd ->', vm.pantryAdd);
 
@@ -81,6 +62,12 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
             vm.resetItems();
             vm.getFood();
         });
+    }
+
+    vm.recipeSuggest = function (food) {
+        console.log('recipeSuggest called with food ->', food);
+        
+
     }
 
     //function to delete item from database

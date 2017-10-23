@@ -1,8 +1,8 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">Log Out {{pc.userObject.name}}</md-button>
+<md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()"><ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}</md-button>
 <h1 class="pgHead">Pantry</h1>
 <section layout="row" ng-init="pc.getFood()">
-  <div flex="15"></div>
+  <div hide show-gt-sm flex="15"></div>
   <div flex>
     <md-card layout-padding>
       <table id="pantryTable" width="100%">
@@ -23,44 +23,50 @@
             <md-button ng-show="pc.sortMethod=='expiry' && pc.reverse == false" class="md-primary md-hue-1" ng-click="pc.sort('expiry')">Expiry<ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon></md-button>
           </th>
           <!-- <th id="smTh"><md-button class="md-raised">Sort</md-button></th> -->
-          <th id="smTh">
+          <!-- <th id="smTh">
             
-          </th>
-          <th id="smTh">
-            <md-button class="md-raised md-primary" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">+</md-button>
-            <md-button class="md-raised md-warn" ng-click="pc.addToggle=false" ng-show="pc.addToggle">Cancel</md-button>
+          </th> -->
+          <th id="btTh" class="centerText">
+            <md-button class="md-raised md-primary" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
+              New <ng-md-icon icon="add_circle_outline"></ng-md-icon>
+            </md-button>
           </th>
         </thead>
         <tbody id="pantryTbody">
-          <tr ng-show="pc.addToggle">
-            <form name="foodForm">
+          <tr ng-show="pc.addToggle" id="addTr">
+            <form name="foodAddForm" ng-submit="pc.addItem()">
               <td class="inputTd">
                 <md-input-container class="inputCon">
-                  <input md-maxlength="20" required="" name="qtyField" ng-model="pc.pantryAdd.qty">
+                  <input md-maxlength="20" name="qtyField" ng-model="pc.pantryAdd.qty" required>
                 </md-input-container>
               </td>
               <td class"inputTd">
                 <md-input-container class="inputCon">
-                  <input md-maxlength="50" required="" name="nameField" ng-model="pc.pantryAdd.name">
+                  <input md-maxlength="50" name="nameField" ng-model="pc.pantryAdd.name" required>
                 </md-input-container>
               </td>
               <td class"inputTd">
                 <md-input-container class="inputCon">
-                  <md-datepicker valid="" md-hide-icons="calendar" required="" name="dateField" ng-model="pc.pantryAdd.expiry"></md-datepicker>
+                  <md-datepicker valid="" md-hide-icons="calendar" name="dateField" ng-model="pc.pantryAdd.expiry" required></md-datepicker>
                 </md-input-container>
               </td>
-              <td class="inputTd" colspan="2">
-                  <md-button class="md-raised md-primary" ng-click="pc.addToggle=false; pc.addItem()" type="submit" name="submit">Add to Pantry</md-button>
+              <td class="inputTd centerText" colspan="2">
+                  <md-button class="md-icon-button" type="submit">
+                    <md-tooltip md-direction="bottom">Add to Pantry</md-tooltip><ng-md-icon icon="add_circle" style="fill: #4CAF50"></ng-md-icon>
+                  </md-button>
+                  <md-button class="md-icon-button" ng-click="pc.addToggle=false" ng-show="pc.addToggle">
+                    <md-tooltip md-direction="bottom">Cancel</md-tooltip><ng-md-icon icon="cancel" style="fill: #F44336"></ng-md-icon>
+                  </md-button>
               </td>
             </form>
           </tr>
           <tr ng-repeat="food in pc.foodObj.food | orderBy:pc.sortMethod:pc.reverse">
-            <form name="foodForm" ng-submit="pc.SaveEditItem()">
+            <form name="foodEditForm" ng-submit="pc.editFood(food.name)">
               <td ng-hide="pc.editToggle === $index">{{food.qty}}</td>
               <td ng-show="pc.editToggle === $index">
                 <md-input-container class="inputCon">
                   <label>{{food.qty}}</label>
-                  <input md-maxlength="20" required="" name="qtyField" ng-model="pc.pantryEdit.qty">
+                  <input md-maxlength="20" name="qtyField" ng-model="pc.pantryEdit.qty" required>
                   <!-- ng-value="food.qty" -->
                 </md-input-container>
               </td>
@@ -68,23 +74,38 @@
               <td ng-show="pc.editToggle === $index">
                 <md-input-container class="inputCon">
                   <label>{{food.name}}</label>
-                  <input md-maxlength="50" required="" name="qtyField" ng-model="pc.pantryEdit.name">
+                  <input md-maxlength="50" name="qtyField" ng-model="pc.pantryEdit.name" required>
                 </md-input-container>
               </td>
               <td ng-hide="pc.editToggle === $index">{{food.expiry}}</td>
               <td ng-show="pc.editToggle === $index">
                 <md-input-container class="inputCon">
                   <label>{{food.expiry}}</label>
-                  <md-datepicker valid="" md-hide-icons="calendar" required="" name="dateField" ng-model="pc.pantryEdit.expiry"></md-datepicker>
+                  <md-datepicker valid="" md-hide-icons="calendar"name="dateField" ng-model="pc.pantryEdit.expiry" required></md-datepicker>
                 </md-input-container>
               </td>
-              <td ng-hide="pc.editToggle === $index"><md-button class="md-icon-button" ng-click="pc.editToggle = $index"><ng-md-icon icon="more_vert"></ng-md-icon></md-button></td>
+              <!-- <td ng-hide="pc.editToggle === $index"></td>
               <td ng-show="pc.editToggle === $index">
                 <md-button class="md-raised md-primary" type="submit" name="submit" ng-click="pc.editFood(food.name)">Confirm</md-button>
+              </td> -->
+              <td ng-hide="pc.editToggle === $index" class="centerText">
+                <md-button class="md-icon-button" ng-click="pc.recipeSuggest(food.name)">
+                  <md-tooltip md-direction="bottom">Recipe Suggestion</md-tooltip><ng-md-icon icon="restaurant" style="fill: #FF9800"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="pc.editToggle = $index">
+                  <md-tooltip md-direction="bottom">Edit</md-tooltip><ng-md-icon icon="mode_edit" style="fill: #2196F3"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="pc.deleteFood(food.name)">
+                  <md-tooltip md-direction="bottom">Delete</md-tooltip><ng-md-icon icon="delete" style="fill: #F44336"></ng-md-icon>
+                </md-button>
               </td>
-              <td ng-hide="pc.editToggle === $index"><md-button class="md-icon-button" ng-click="pc.deleteFood(food.name)"><ng-md-icon icon="delete" style="fill: red"></ng-md-icon></md-button></td>
-              <td ng-show="pc.editToggle === $index">
-                <md-button class="md-raised md-warn" ng-click="pc.editToggle = -1">Cancel</md-button>
+              <td ng-show="pc.editToggle === $index" class="centerText">
+                <md-button class="md-icon-button" type="submit">
+                  <md-tooltip md-direction="bottom">Save Changes</md-tooltip><ng-md-icon icon="save" style="fill: #4CAF50"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="pc.editToggle = -1">
+                  <md-tooltip md-direction="bottom">Cancel</md-tooltip><ng-md-icon icon="cancel" style="fill: #F44336"></ng-md-icon>
+                </md-button>
               </td>
             </form>
           </tr>
@@ -92,5 +113,5 @@
       </table>
     </md-card>
   </div>
-  <div flex="15"></div>
+  <div hide show-gt-sm flex="15"></div>
 </section>

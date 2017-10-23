@@ -10,6 +10,10 @@
     text-transform: capitalize;
 }
 
+.centerText {
+    text-align: center;
+}
+
 #appLogo {
     font-weight: bold;
 }
@@ -46,8 +50,9 @@
     text-align: left;
 }
 
-td {
-    /* text-align: center; */
+#btTh {
+    width: 15%;
+    text-align: center;
 }
 
 #inputTd {
@@ -60,4 +65,9 @@ td {
 
 #pantryTbody tr {
     height: 64px;
+}
+
+.inputRow {
+    border-left: 1px solid #4CAF50;
+    border-right: 1px solid #4CAF50;
 }

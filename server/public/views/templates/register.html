@@ -2,7 +2,9 @@
   <h1 class="brand">FreshList</h1>
 </section>
 <section layout="row" ng-cloak="" class="logReg">
-  <div flex="33"></div>
+  <div hide show-sm flex="15"></div>
+  <div hide show-md flex="25"></div>
+  <div hide show-lg flex="33"></div>
   <md-content flex>
     <form name="registerForm" ng-submit="lc.registerUser()">
       <md-card layout="column" layout-padding>
@@ -52,5 +54,7 @@
       </md-card>
     </form>
   </md-content>
-  <div flex="33"></div>
+  <div hide show-lg flex="33"></div>
+  <div hide show-md flex="25"></div>
+  <div hide show-sm flex="15"></div>
 </section>
