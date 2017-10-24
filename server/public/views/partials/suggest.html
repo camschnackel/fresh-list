@@ -1,72 +1,87 @@
-<article layout="row">
-  <md-dialog aria-label="Mango (Fruit)">
-    <form>
-      <md-toolbar>
-        <div class="md-toolbar-tools">
-          <h2>Suggested Recipes</h2>
-          <span flex></span>
-          <md-button class="md-icon-button" ng-click="cancel()">
-            <md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>
-          </md-button>
-        </div>
-      </md-toolbar>
-      <md-dialog-content style="max-width:800px;max-height:810px; ">
-        <md-tabs md-dynamic-height md-border-bottom>
-          <md-tab label="one">
-            <md-content class="md-padding">
-              <h1 class="md-display-2">Tab One</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque
-                ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est,
-                sollicitudin consectetur felis nec, feugiat ultricies mi.</p>
-            </md-content>
-          </md-tab>
-          <md-tab label="two">
-            <md-content class="md-padding">
-              <h1 class="md-display-2">Tab Two</h1>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque
-                ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est,
-                sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices
-                porttitor, orci enim rutrum enim, vel tempor sapien arcu a tellus. Vivamus convallis sodales ante varius gravida.
-                Curabitur a purus vel augue ultrices ultricies id a nisl. Nullam malesuada consequat diam, a facilisis tortor
-                volutpat et. Sed urna dolor, aliquet vitae posuere vulputate, euismod ac lorem. Sed felis risus, pulvinar at
-                interdum quis, vehicula sed odio. Phasellus in enim venenatis, iaculis tortor eu, bibendum ante. Donec ac tellus
-                dictum neque volutpat blandit. Praesent efficitur faucibus risus, ac auctor purus porttitor vitae. Phasellus
-                ornare dui nec orci posuere, nec luctus mauris semper.</p>
-              <p>Morbi viverra, ante vel aliquet tincidunt, leo dolor pharetra quam, at semper massa orci nec magna. Donec posuere
-                nec sapien sed laoreet. Etiam cursus nunc in condimentum facilisis. Etiam in tempor tortor. Vivamus faucibus
-                egestas enim, at convallis diam pulvinar vel. Cras ac orci eget nisi maximus cursus. Nunc urna libero, viverra
-                sit amet nisl at, hendrerit tempor turpis. Maecenas facilisis convallis mi vel tempor. Nullam vitae nunc leo.
-                Cras sed nisl consectetur, rhoncus sapien sit amet, tempus sapien.</p>
-              <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum.
-                Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum
-                nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus
-                commodo lectus.</p>
-            </md-content>
-          </md-tab>
-          <md-tab label="three">
-            <md-content class="md-padding">
-              <h1 class="md-display-2">Tab Three</h1>
-              <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum.
-                Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum
-                nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus
-                commodo lectus.</p>
-            </md-content>
-          </md-tab>
-        </md-tabs>
-      </md-dialog-content>
-  
-      <md-dialog-actions layout="row">
-        <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-          More on Wikipedia
-        </md-button>
-        <span flex></span>
-        <md-button ng-click="answer('not useful')">
-          Not Useful
-        </md-button>
-        <md-button ng-click="answer('useful')" style="margin-right:20px;">
-          Useful
-        </md-button>
-      </md-dialog-actions>
-    </form>
-  </md-dialog>
-</article>
+<md-dialog aria-label="Suggested Recipes">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Suggested Recipes</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <ng-md-icon icon="cancel" style="fill: rgb(255, 255, 255)"></ng-md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content class="recipeDialog" ng-hide="suggestedRecipes.length>1">
+    <div flex layout="row" layout-sm="column" layout-align="center center" aria-label="wait">
+      <md-progress-circular md-mode="indeterminate" style="margin-top:40px"></md-progress-circular>
+    </div>
+  </md-dialog-content>
+  <md-dialog-content class="recipeDialog" ng-show="suggestedRecipes.length>1">
+    <md-tabs md-dynamic-height md-border-bottom>
+      <md-tab label="Recipe {{$index+1}}" md-on-select="selectedTab=$index" ng-repeat="recipe in suggestedRecipes | limitTo:5">
+        <md-content class="md-padding">
+          <div layout="row">
+            <div flex="65" layout="row" layout-align="center center">
+              <h1 class="md-display-2">{{recipe.label}}</h1>
+            </div>
+            <div flex="5">
+            </div>
+            <div flex layout="column" layout-align="start end">
+              <div flex="20">
+                <md-button class="md-icon-button" ng-click="favorite()" class="favIcon">
+                  <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
+                  <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
+                </md-button>
+              </div>
+              <div flex>
+                <p>&nbsp&nbsp View Recipe:<br>
+                  <md-button class="md-primary" ng-href="{{recipe.url}}" target="_blank">
+                    <md-tooltip md-direction="left">Opens Recipe Site in New Tab</md-tooltip>
+                    {{recipe.source}} <ng-md-icon icon="exit_to_app" style="fill: #4CAF50"></ng-md-icon>
+                  </md-button>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div layout="row">
+            <div flex>
+              <md-list>
+                <p>Ingredients:&nbsp</p>
+                <md-list-item  class="md-1-line" ng-repeat="thing in recipe.ingredientLines">{{thing}}</md-list-item>
+              </md-list>
+            </div>
+            <div flex="50" layout="row" layout-align="center start">
+              <img class="suggestImg" ng-src="{{recipe.image}}">
+            </div>
+          </div>
+          <md-list>
+            <md-list-item class="md-1-line" ng-show="recipe.dietLabels.length>0">
+              <p>Dietary Info:&nbsp
+                <span ng-repeat="diet in recipe.dietLabels">{{diet}} </span>
+              </p>
+            </md-list-item>
+            <md-list-item class="md-1-line" ng-show="recipe.healthLabels.length>0">
+              <p>Health Info:&nbsp</p>
+              <md-chips ng-model="recipe.healthLabels" readonly="true">
+                <md-chip-template>{{$chip}}</md-chip-template>
+              </md-chips>
+            </md-list-item>
+            <!-- <md-list-item>
+              <div id="edamam-badge" data-color="transparent"></div>
+            </md-list-item> -->
+          </md-list>
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-dialog-content>
+
+  <!-- <md-dialog-actions layout="row">
+    <md-button ng-click="pc.saveRecipe" target="_blank" md-autofocus>
+      Save Recipe
+    </md-button>
+    <span flex></span>
+    <md-button ng-click="answer('not useful')">
+      Not Useful
+    </md-button>
+    <md-button ng-click="answer('useful')" style="margin-right:20px;">
+      Useful
+    </md-button>
+  </md-dialog-actions> -->
+</md-dialog>

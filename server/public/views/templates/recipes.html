@@ -1,5 +1,12 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<div>
-    <h1 id="welcome" class="lead">Welcome to your Recipes, <span class="capInput">{{rc.userObject.name}}</span>!</h1>
-    <button class="btn btn-default" ng-click="rc.userService.logout()">Log Out {{rc.userObject.name}}</button>
-</div>
+<md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
+  <ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}</md-button>
+<h1 class="pgHead">Recipes</h1>
+<section layout="row" ng-init="pc.getFood()">
+  <div hide show-gt-sm flex="15"></div>
+  <div flex>
+    <md-card>
+    </md-card>
+  </div>
+  <div hide show-gt-sm flex="15"></div>
+</section>

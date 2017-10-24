@@ -1,4 +1,4 @@
-myApp.controller('PantryController', function (UserService, FoodService, $scope, $filter, $mdDialog) {
+myApp.controller('PantryController', function (UserService, FoodService, RecipeService, $scope, $filter, $mdDialog) {
   console.log('PantryController created');
   $scope.currentNavItem = 'pantry';
 
@@ -54,7 +54,7 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
 
   // function to add new food item to database
   vm.addItem = function () {
-    pc.addToggle = false;
+    vm.addToggle = false;
     vm.pantryAdd.expiry = $filter('date')(vm.pantryAdd.expiry, "MM/dd/yyyy");
     console.log('addItem clicked! vm.pantryAdd ->', vm.pantryAdd);
 
@@ -64,25 +64,30 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     });
   }
 
-  vm.recipeSuggest = function (ev, food) {
+  vm.suggestDialog = function (ev, food) {
     console.log('recipeSuggest called with food ->', food);
 
-    $mdDialog.show({
+    RecipeService.recipeSuggest(food).then($mdDialog.show({
         controller: DialogController,
         templateUrl: '../views/partials/suggest.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true,
-        fullscreen: true // Only for -xs, -sm breakpoints.
+        fullscreen: true
       })
       // .then(function (answer) {
       //   $scope.status = 'You said the information was "' + answer + '".';
       // }, function () {
       //   $scope.status = 'You cancelled the dialog.';
       // });
-  }
+    )}
 
-  function DialogController($scope, $mdDialog) {
+  function DialogController(RecipeService, $scope, $mdDialog) {
+
+    $scope.suggestedRecipes = RecipeService.suggestedRecipes;
+    console.log('$scope.suggestedRecipes ->', $scope.suggestedRecipes);
+    
+
     $scope.hide = function () {
       $mdDialog.hide();
     };
@@ -94,6 +99,12 @@ myApp.controller('PantryController', function (UserService, FoodService, $scope,
     $scope.answer = function (answer) {
       $mdDialog.hide(answer);
     };
+
+    $scope.favorite = function () {
+      console.log('favorite clicked');
+    };
+
+    $scope.selectedTab = '';
   }
 
   //function to delete item from database

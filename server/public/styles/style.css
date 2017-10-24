@@ -38,25 +38,11 @@
   font-family: Helvetica, sans-serif;
   text-align: center;
   font-size: 72px;
+  color: #5abc56;
 }
 
-#smTh {
-  width: 15%;
+.leftText {
   text-align: left;
-}
-
-#lgTh {
-  width: 40%;
-  text-align: left;
-}
-
-#btTh {
-  width: 15%;
-  text-align: center;
-}
-
-#inputTd {
-  padding: 0;
 }
 
 .inputCon {
@@ -70,4 +56,19 @@
 .inputRow {
   border-left: 1px solid #4CAF50;
   border-right: 1px solid #4CAF50;
+}
+
+#inputArea {
+  background-color: #f3f3f3;
+}
+
+.blueButton {
+  background-color: #2196F3;
+}
+
+.recipeDialog {
+  min-height: 200px;
+  min-width: 300px;
+  max-height: 800px;
+  max-width: 800px;
 }
