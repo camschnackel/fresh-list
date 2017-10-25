@@ -3,7 +3,7 @@ var path = require('path');
 var Food = require('../models/user.js');
 
 router.get('/', function (req, res) {
-  console.log('in pantry get route');
+  console.log('in food get route');
 
   Food.find({
     username: req.user.username
@@ -19,8 +19,8 @@ router.get('/', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-  console.log('in pantry post router, req.body ->', req.body);
-  console.log('in pantry post router, req.user ->', req.user);
+  console.log('in food post router, req.body ->', req.body);
+  console.log('in food post router, req.user ->', req.user);
 
   Food.updateOne({
       username: req.user.username
@@ -46,7 +46,7 @@ router.post('/', function (req, res) {
 });
 
 router.put('/', function (req, res) {
-  console.log('in pantry put router, req.body ->', req.body);
+  console.log('in food put router, req.body ->', req.body);
 
   Food.update({
       username: req.user.username,
@@ -70,7 +70,7 @@ router.put('/', function (req, res) {
 })
 
 router.delete('/:food', function (req, res) {
-  console.log('in pantry delete route with req.params ->', req.params);
+  console.log('in food delete route with req.params ->', req.params);
 
   Food.update({
       username: req.user.username

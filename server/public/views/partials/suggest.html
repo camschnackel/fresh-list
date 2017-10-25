@@ -8,26 +8,30 @@
       </md-button>
     </div>
   </md-toolbar>
-  <md-dialog-content class="recipeDialog" ng-hide="suggestedRecipes.length>1">
+  <md-dialog-content class="recipeDialog" ng-hide="recipeObject.suggested.length>1">
     <div flex layout="row" layout-sm="column" layout-align="center center" aria-label="wait">
       <md-progress-circular md-mode="indeterminate" style="margin-top:40px"></md-progress-circular>
     </div>
   </md-dialog-content>
-  <md-dialog-content class="recipeDialog" ng-show="suggestedRecipes.length>1">
+  <md-dialog-content class="recipeDialog" ng-show="recipeObject.suggested.length>1">
     <md-tabs md-dynamic-height md-border-bottom>
-      <md-tab label="Recipe {{$index+1}}" md-on-select="selectedTab=$index" ng-repeat="recipe in suggestedRecipes | limitTo:5">
+      <md-tab label="Recipe {{$index+1}}" md-on-select="selectedTab=$index" ng-repeat="recipe in recipeObject.suggested | limitTo:5">
         <md-content class="md-padding">
           <div layout="row">
-            <div flex="65" layout="row" layout-align="center center">
+            <div flex="65" layout="row" layout-align="start center">
               <h1 class="md-display-2">{{recipe.label}}</h1>
             </div>
             <div flex="5">
             </div>
             <div flex layout="column" layout-align="start end">
               <div flex="20">
-                <md-button class="md-icon-button" ng-click="favorite()" class="favIcon">
+                <md-button class="md-icon-button" ng-click="favorite(recipe.uri)" class="favIcon" ng-hide="recipe.favorited">
                   <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
                   <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="unFavorite(recipe.uri)" class="favIcon" ng-show="recipe.favorited">
+                  <md-tooltip md-direction="left">Remove from Favorites</md-tooltip>
+                  <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
                 </md-button>
               </div>
               <div flex>

@@ -10,7 +10,7 @@ myApp.service('FoodService', function ($http) {
     console.log('in getFood');
     $http({
       method: 'GET',
-      url: '/pantry'
+      url: '/food'
     }).then(function (response) {
       console.log('response.data ->', response.data);
       self.foodObj.food = response.data[0].food;
@@ -36,7 +36,7 @@ myApp.service('FoodService', function ($http) {
     console.log('in postFood');
     return $http({
       method: 'POST',
-      url: '/pantry',
+      url: '/food',
       data: objToSend
     });
   }
@@ -45,7 +45,7 @@ myApp.service('FoodService', function ($http) {
     console.log('in putFood w/ objToSend ->', objToSend);
     return $http({
       method: 'PUT',
-      url: '/pantry',
+      url: '/food',
       data: objToSend
     });
   }
@@ -61,7 +61,7 @@ myApp.service('FoodService', function ($http) {
 
     return $http({
       method: 'DELETE',
-      url: '/pantry/' + objToSend.food
+      url: '/food/' + objToSend.food
       // data: objToSend
     });
   }

@@ -8,7 +8,8 @@ var UserSchema = new Schema({
     name: {type: String, required: true},
     username: {type: String, required: true, index: {unique: true}},
     password: {type: String, required: true},
-    food: []
+    food: [],
+    recipes: []
 });
 
 // Called before adding a new user to the DB. Encrypts password.
