@@ -1,6 +1,7 @@
 var router = require('express').Router();
 var path = require('path');
 var request = require('request');
+var mongoose = require('mongoose');
 var Food = require('../models/user.js');
 
 router.get('/suggest', function (req, res) {
@@ -27,27 +28,75 @@ router.get('/suggest', function (req, res) {
 
 })
 
+router.get('/', function (req, res) {
+  console.log('in the recipe get route');
+
+  Food.find({
+      username: req.user.username
+    }, {
+      recipes: 1,
+      _id: 0
+    },
+    function (err, recipeResults) {
+      if (err) {
+        console.log('Food.find err ->', err);
+        res.sendStatus(500);
+      } else {
+        console.log('Get Update Added');
+        res.send(recipeResults);
+      }
+    })
+})
+
 router.post('/', function (req, res) {
   console.log('in the recipe post route, req.body ->', req.body);
 
   Food.updateOne({
-    username: req.user.username
-  }, {
-    $push: {
-      recipes: {
-        uri: req.body.uri
+      username: req.user.username
+    }, {
+      $push: {
+        recipes: {
+          uri: req.body.uri
+        }
+      }
+    },
+    function (err, response) {
+      if (err) {
+        console.log('Recipe.updateOne err', err);
+        res.sendStatus(500);
+      } else {
+        console.log('Post Update added');
+        res.sendStatus(201);
       }
     }
-  },
-  function (err, response) {
-    if (err) {
-      console.log('Recipe.updateOne err', err);
-      res.sendStatus(500);
-    } else {
-      console.log('Post Update added');
-      res.sendStatus(201);
+  );
+})
+
+router.delete('/:uri', function (req, res) {
+  console.log('in the recipe delete route, req.params ->', req.params);
+
+  var uri = 'http://www.edamam.com/ontologies/edamam.owl#';
+  uri += req.params.uri; // Adding rest of URI back
+  req.params = uri; // setting req.params value to full URI
+
+  Food.update({
+    username: req.user.username
+  }, {
+      $pull: {
+        recipes: {
+          "uri": req.params
+        }
+      }
+    },
+    function (err, response) {
+      if (err) {
+        console.log('Recipe.updateOne err', err);
+        res.sendStatus(500);
+      } else {
+        console.log('Delete Update added');
+        res.sendStatus(201);
+      }
     }
-  }
   );
 })
 

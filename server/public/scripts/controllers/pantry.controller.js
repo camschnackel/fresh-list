@@ -75,17 +75,11 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
         clickOutsideToClose: true,
         fullscreen: true
       })
-      // .then(function (answer) {
-      //   $scope.status = 'You said the information was "' + answer + '".';
-      // }, function () {
-      //   $scope.status = 'You cancelled the dialog.';
-      // });
     )}
 
   function DialogController(RecipeService, $scope, $mdDialog) {
 
     $scope.recipeObject = RecipeService.recipeObject;
-    // $scope.suggestedRecipes = RecipeService.recipeObject.suggested;
     console.log('$scope.recipeObject ->', $scope.recipeObject);
     
 
@@ -101,40 +95,16 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
       $mdDialog.hide(answer);
     };
 
-    $scope.checkFavs = function () {
-      console.log('checkFavs called');
-
-      $scope.recipeObject.saved
-      $scope.recipeObject.suggested
-      
-      // var findShit = function (uri1) {
-      //   $scope.recipeObject.saved.filter(function (uri2) {
-      //     return uri2 === uri1;
-      //   })
-      // }
-
-      // for (var i = 0; i < $scope.recipeObject.suggested.length; i++) {
-      //   if (findShit($scope.recipeObject.suggested[i].uri).length > 0){
-      //     $scope.recipeObject.suggested[i].favorited = true;
-      //   }
-      // }
-      console.log('$scope.recipeObject.suggested ->', $scope.recipeObject.suggested);
-      
-    }
-
     $scope.favorite = function (id) {
       console.log('favorite clicked w/ ->', id);
       RecipeService.postRecipe(id);
-      $scope.checkFavs();
     };
 
     $scope.unFavorite = function (id) {
       console.log('unFavorite clicked w/ ->', id);
-      // RecipeService.postRecipe(id);
-      // $scope.checkFavs();
+      RecipeService.deleteRecipe(id);
     };
 
-    $scope.checkFavs();
     $scope.selectedTab = '';
   }
 

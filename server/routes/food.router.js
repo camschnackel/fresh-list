@@ -3,19 +3,23 @@ var path = require('path');
 var Food = require('../models/user.js');
 
 router.get('/', function (req, res) {
-  console.log('in food get route');
+  console.log('in the food get route');
 
   Food.find({
-    username: req.user.username
-  }, function (err, foodResults) {
-    if (err) {
-      console.log('Food.find err ->', err);
-      res.sendStatus(500);
-    } else {
-      console.log('Get Update Added');
-      res.send(foodResults);
-    }
-  })
+      username: req.user.username
+    }, {
+      food: 1,
+      _id: 0
+    },
+    function (err, foodResults) {
+      if (err) {
+        console.log('Food.find err ->', err);
+        res.sendStatus(500);
+      } else {
+        console.log('Get Update Added');
+        res.send(foodResults);
+      }
+    })
 })
 
 router.post('/', function (req, res) {
