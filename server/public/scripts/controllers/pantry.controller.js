@@ -95,9 +95,9 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
       $mdDialog.hide(answer);
     };
 
-    $scope.favorite = function (id) {
-      console.log('favorite clicked w/ ->', id);
-      RecipeService.postRecipe(id);
+    $scope.favorite = function (recipe) {
+      console.log('favorite clicked w/ ->', recipe);
+      RecipeService.postRecipe(recipe);
     };
 
     $scope.unFavorite = function (id) {

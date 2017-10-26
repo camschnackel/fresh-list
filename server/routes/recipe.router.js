@@ -56,6 +56,14 @@ router.post('/', function (req, res) {
     }, {
       $push: {
         recipes: {
+          label: req.body.label,
+          url: req.body.url,
+          uri: req.body.uri,
+          dietLabels: req.body.diet,
+          healthLabels: req.body.healthLabels,
+          ingredientLines: req.body.ingredientLines,
+          image: req.body.image,
+          source: req.body.source,
           uri: req.body.uri
         }
       }

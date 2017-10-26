@@ -8,7 +8,7 @@ myApp.service('RecipeService', function ($http) {
 
   self.matchSaves = function (uri1) {
     var results = self.recipeObject.saved.filter(function (uri2) {
-      return uri2 === uri1;
+      return uri2.uri === uri1;
     })
     console.log('results ->', results);
     if (results.length > 0) {
@@ -62,24 +62,23 @@ myApp.service('RecipeService', function ($http) {
     }).then(function (response) {
       console.log('in getSaved w/ response.data[0].recipes ->', response.data[0].recipes);
       for (var i = 0; i < response.data[0].recipes.length; i++) {
-        self.recipeObject.saved.push(response.data[0].recipes[i].uri);
+        self.recipeObject.saved.push(response.data[0].recipes[i]);
       }
       console.log('self.recipeObject.saved ->', self.recipeObject.saved);
     }).then(function () {
+      if (self.recipeObject.suggested.length>0){
       self.updateSaves();
+      }
     })
   }
 
-  self.postRecipe = function (uri) {
-    console.log('in postRecipe w/ uri ->', uri);
-    var objToSend = {
-      uri: uri
-    }
+  self.postRecipe = function (recipe) {
+    console.log('in postRecipe w/ recipe ->', recipe);
 
     $http({
       method: 'POST',
       url: '/recipe',
-      data: objToSend
+      data: recipe
     }).then(function () {
       self.getSaved();
     })
