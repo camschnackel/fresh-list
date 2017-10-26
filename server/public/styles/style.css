@@ -1,3 +1,11 @@
+span .md-button {
+  margin: 0;
+}
+
+.md-button:not([disabled]):hover {
+  background-color: rgba(255, 255, 255, 0);
+}
+
 .brand {
   text-align: center;
   font-size: 82px;
@@ -121,7 +129,7 @@
 .repeated-item {
   /* box-sizing: border-box; */
   display: inline-block;
-  height: 480px;
+  height: 490px;
   text-align: center;
   min-width: 400px;
   margin: 20px;
@@ -148,7 +156,7 @@
 
 .scrollDiv {
   overflow: scroll;
-  height: 232px;
+  height: 237px;
   text-align: left;
 }
 

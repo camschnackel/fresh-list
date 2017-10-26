@@ -6,9 +6,6 @@
   <div hide show-gt-sm flex="15"></div>
   <div flex>
     <md-card>
-      <!-- <table id="pantryTable" width="100%"> -->
-
-      <!-- <thead> -->
       <md-toolbar>
         <div class="md-toolbar-tools" layout="row">
           <div class="leftText" flex="15">
@@ -38,10 +35,6 @@
               <ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon>
             </md-button>
           </div>
-          <!-- <th id="smTh"><md-button class="md-raised">Sort</md-button></th> -->
-          <!-- <th id="smTh">
-            
-          </th> -->
           <div class="centerText" flex="20">
             <md-button class="md-raised" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
               New
@@ -50,8 +43,6 @@
           </div>
         </div>
       </md-toolbar>
-      <!-- </thead> -->
-      <!-- <tbody id="pantryTbody"> -->
       <md-content>
         <md-list>
           <form name="foodAddForm" ng-submit="pc.addItem()">
