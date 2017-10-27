@@ -44,7 +44,7 @@
       <md-card-content style="padding: 0">
         <div class="scrollDiv">
           <md-list id="recipeList" ng-show="rc.toggleState[$index].Ingredients">
-            <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines" ng-init="rc.toggleIngredients($index)">{{thing}}</md-list-item>
+            <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines track by $index" ng-init="rc.toggleIngredients($index)">{{thing}}</md-list-item>
           </md-list>
           <md-chips ng-model="recipe.healthLabels" readonly="true" ng-show="rc.toggleState[$index].Health" layout="row" layout-align="space-around center">
             <md-chip-template>{{$chip}}</md-chip-template>
