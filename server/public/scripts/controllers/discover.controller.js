@@ -1,5 +1,5 @@
-myApp.controller('RecipeController', function (UserService, RecipeService, $scope) {
-    console.log('RecipeController created');
+myApp.controller('DiscoverController', function (UserService, RecipeService, $scope) {
+    console.log('DiscoverController created');
     var vm = this;
     vm.userService = UserService;
     vm.userObject = UserService.userObject;
@@ -9,7 +9,7 @@ myApp.controller('RecipeController', function (UserService, RecipeService, $scop
     vm.query = '';
 
     vm.toggleIngredients = function (index) {
-        vm.toggleState[index]= {};
+        vm.toggleState[index] = {};
         vm.toggleState[index].Ingredients = true;
         vm.toggleState[index].Health = false;
         vm.toggleState[index].Diet = false;
@@ -37,12 +37,18 @@ myApp.controller('RecipeController', function (UserService, RecipeService, $scop
         RecipeService.postRecipe(recipe);
     };
 
-    vm.unFavorite = function (id, index) {
+    vm.unFavorite = function (id) {
         console.log('unFavorite clicked w/ ->', id);
-        vm[index] = true;
-        RecipeService.deleteRecipeStop(id);
+        RecipeService.deleteRecipe(id);
     };
 
+    vm.search = function () {
+        RecipeService.search(vm.query).then(function () {
+            vm.query = '';
+        })
+    }
+
     vm.getSaved();
-    $scope.currentNavItem = 'recipes';
+
+    $scope.currentNavItem = 'discover';
 });

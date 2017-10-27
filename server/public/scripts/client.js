@@ -26,6 +26,14 @@ myApp.config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
           return UserService.getuser();
         }
       }
+    }).when('/discover', {
+      templateUrl: '/views/templates/discover.html',
+      controller: 'DiscoverController as dc',
+      resolve: {
+        getuser: function (UserService) {
+          return UserService.getuser();
+        }
+      }
     }).when('/support', {
       templateUrl: '/views/templates/support.html',
       controller: 'SupportController as sc',

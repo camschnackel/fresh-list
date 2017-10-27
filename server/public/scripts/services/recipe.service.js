@@ -3,7 +3,36 @@ myApp.service('RecipeService', function ($http) {
   var self = this;
   self.recipeObject = {
     suggested: [],
-    saved: []
+    saved: [],
+    results: []
+  }
+
+  self.search = function (food) {
+    self.recipeObject.results = [];
+    console.log('in get searched recipes');
+
+    return $http({
+      method: 'GET',
+      url: '/recipe/search?name=' + food
+    }).then(function (response) {
+      console.log('Edamom call response ->', response.data);
+      for (var i = 0; i < 10; i++) {
+        var recipe = {
+          label: response.data.hits[i].recipe.label,
+          url: response.data.hits[i].recipe.url,
+          uri: response.data.hits[i].recipe.uri,
+          dietLabels: response.data.hits[i].recipe.diet,
+          healthLabels: response.data.hits[i].recipe.healthLabels,
+          ingredientLines: response.data.hits[i].recipe.ingredientLines,
+          image: response.data.hits[i].recipe.image,
+          source: response.data.hits[i].recipe.source
+        }
+        self.recipeObject.results.push(recipe);
+      }
+      console.log('self.results->', self.recipeObject.results);
+    }).then(function () {
+      self.updateDiscoverSaves();
+    })
   }
 
   self.matchSaves = function (uri1) {
@@ -23,6 +52,14 @@ myApp.service('RecipeService', function ($http) {
       self.recipeObject.suggested[i].saved = self.matchSaves(self.recipeObject.suggested[i].uri);
     }
     console.log('self.recipeObject after updateSaves ->', self.recipeObject);
+
+  }
+
+  self.updateDiscoverSaves = function () {
+    for (var i = 0; i < self.recipeObject.results.length; i++) {
+      self.recipeObject.results[i].saved = self.matchSaves(self.recipeObject.results[i].uri);
+    }
+    console.log('self.recipeObject after updateDiscoverSaves ->', self.recipeObject);
 
   }
 
@@ -54,6 +91,8 @@ myApp.service('RecipeService', function ($http) {
   }
 
   self.getSaved = function () {
+    console.log('self.getSaved hit');
+    
     self.recipeObject.saved = [];
 
     $http({
@@ -66,8 +105,10 @@ myApp.service('RecipeService', function ($http) {
       }
       console.log('self.recipeObject.saved ->', self.recipeObject.saved);
     }).then(function () {
-      if (self.recipeObject.suggested.length>0){
-      self.updateSaves();
+      if (self.recipeObject.suggested.length > 0) {
+        self.updateSaves();
+      } else if (self.recipeObject.results.length > 0) {
+        self.updateDiscoverSaves();
       }
     })
   }
@@ -91,18 +132,31 @@ myApp.service('RecipeService', function ($http) {
     // API uses URI for ID and this URI breaks the DELETE route due to being passed on its URL
     // To remedy this, I slice the first many characters off and keep just the identifying piece
 
-    var objToSend = {
-      uri: uri
-    }
 
-    return $http({
+    $http({
       method: 'DELETE',
       url: '/recipe/' + uri
       // data: objToSend
     }).then(function () {
       self.getSaved();
-    }).then(function () {
-      self.updateSaves();
+    })
+    // .then(function () {
+    //   self.updateSaves();
+    // })
+  }
+
+  self.deleteRecipeStop = function (uri) {
+    console.log('in deleteRecipeStop w/ uri ->', uri);
+
+    uri = uri.slice(44);
+    // API uses URI for ID and this URI breaks the DELETE route due to being passed on its URL
+    // To remedy this, I slice the first many characters off and keep just the identifying piece
+
+
+    return $http({
+      method: 'DELETE',
+      url: '/recipe/' + uri
+      // data: objToSend
     })
   }
 })

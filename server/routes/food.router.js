@@ -1,6 +1,9 @@
 var router = require('express').Router();
 var path = require('path');
+var mongoose = require('mongoose');
 var Food = require('../models/user.js');
+var mongodb = require('mongodb');
+
 
 router.get('/', function (req, res) {
   console.log('in the food get route');
@@ -31,6 +34,7 @@ router.post('/', function (req, res) {
     }, {
       $push: {
         food: {
+          _id: mongoose.Types.ObjectId(),
           qty: req.body.qty,
           name: req.body.name,
           expiry: req.body.expiry
@@ -74,14 +78,14 @@ router.put('/', function (req, res) {
 })
 
 router.delete('/:food', function (req, res) {
-  console.log('in food delete route with req.params ->', req.params);
+  console.log('in food delete route with req.params.food ->', req.params.food);
 
   Food.update({
       username: req.user.username
     }, {
       $pull: {
         food: {
-          "name": req.params.food
+          "_id": mongodb.ObjectId(req.params.food)
         }
       }
     },

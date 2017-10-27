@@ -1,4 +1,10 @@
 <div ng-include="'views/partials/nav.html'"></div>
+<md-input-container class="md-block searchBox" flex-gt-sm="" md-no-float="true">
+  <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
+</md-input-container>
+<md-button class="md-icon-button goBtn" ng-click="">
+  <ng-md-icon icon="search"></ng-md-icon>
+</md-button>
 <md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
   <ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}</md-button>
 <h1 class="pgHead">Pantry</h1>
@@ -27,11 +33,11 @@
             </md-button>
           </div>
           <div class="leftText" flex="15">
-            <md-button ng-show="pc.sortMethod!=='expiry'" ng-click="pc.sort('expiry')">Expiry</md-button>
-            <md-button ng-show="pc.sortMethod=='expiry' && pc.reverse == true" ng-click="pc.sort('expiry')">Expiry
+            <md-button ng-show="pc.sortMethod!=='dif'" ng-click="pc.sort('dif')">Expiry</md-button>
+            <md-button ng-show="pc.sortMethod=='dif' && pc.reverse == true" ng-click="pc.sort('dif')">Expiry
               <ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon>
             </md-button>
-            <md-button ng-show="pc.sortMethod=='expiry' && pc.reverse == false" ng-click="pc.sort('expiry')">Expiry
+            <md-button ng-show="pc.sortMethod=='dif' && pc.reverse == false" ng-click="pc.sort('dif')">Expiry
               <ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon>
             </md-button>
           </div>
@@ -74,7 +80,7 @@
               </div>
             </md-list-item>
           </form>
-          <form name="foodEditForm" ng-repeat="food in pc.foodObj.food | orderBy:pc.sortMethod:pc.reverse" ng-submit="pc.editFood(food.name)">
+          <form name="foodEditForm" ng-repeat="food in pc.foodObj.food | orderBy:pc.sortMethod:pc.reverse | filter:pc.query" ng-submit="pc.editFood(food.name)">
             <md-list-item class="md-2-line" layout="row">
               <div ng-hide="pc.editToggle === $index" flex="15" class="md-list-item-text">{{food.qty}}</div>
               <div ng-show="pc.editToggle === $index" flex="15" class="md-list-item-text">
@@ -107,7 +113,7 @@
                   <md-tooltip md-direction="bottom">Edit</md-tooltip>
                   <ng-md-icon icon="mode_edit" style="fill: #2196F3"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="pc.deleteFood(food.name)">
+                <md-button class="md-icon-button" ng-click="pc.deleteFood(food._id)">
                   <md-tooltip md-direction="bottom">Delete</md-tooltip>
                   <ng-md-icon icon="delete" style="fill: #F44336"></ng-md-icon>
                 </md-button>

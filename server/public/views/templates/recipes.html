@@ -1,11 +1,16 @@
 <div ng-include="'views/partials/nav.html'"></div>
+<md-input-container class="md-block searchBox" flex-gt-sm="" md-no-float="true">
+  <input name="search" type="string" ng-model="rc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Saved Recipes">
+</md-input-container>
+<md-button class="md-icon-button goBtn" ng-click=""><ng-md-icon icon="search"></ng-md-icon></md-button>
 <md-button class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
-  <ng-md-icon icon="logout"></ng-md-icon> Log Out {{rc.userObject.name}}</md-button>
-<h1 class="pgHead">Recipes</h1>
-<section layout-xs="column" layout="column">
+  <ng-md-icon icon="logout"></ng-md-icon> Log Out {{rc.userObject.name}}
+</md-button>
+<h1 class="pgHead">Saved</h1>
+<section layout="column">
   <md-content layout="row">
-    <md-card ng-repeat="recipe in rc.recipeObject.saved" class="repeated-item" ng-hide="rc[$index]">
-      <md-button class="md-icon-button" ng-click="rc.unFavorite(recipe.uri)" class="favIcon" id="fltLft">
+    <md-card ng-repeat="recipe in rc.recipeObject.saved | filter:rc.query" class="repeated-item" ng-hide="rc[$index]">
+      <md-button class="md-icon-button" ng-click="rc.unFavorite(recipe.uri, $index)" class="favIcon" id="fltLft">
         <md-tooltip md-direction="top">Remove from Favorites</md-tooltip>
         <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
       </md-button>
@@ -27,10 +32,13 @@
         </md-card-title-media>
       </md-card-title>
       <md-toolbar class="md-primary">
-        <div class="md-toolbar-tools" layout-align="center center">
-          <md-button ng-click="rc.toggleIngredients($index)">Ingredients</md-button>
-          <md-button ng-click="rc.toggleHealth($index)">Health Info</md-button>
-          <md-button ng-click="rc.toggleDiet($index)">Diet Info</md-button>
+        <div class="md-toolbar-tools" layout-align="space-around center">
+          <md-button ng-click="rc.toggleIngredients($index)">
+            <ng-md-icon icon="keyboard_arrow_right" ng-show="rc.toggleState[$index].Ingredients"></ng-md-icon>Ingredients</md-button>
+          <md-button ng-click="rc.toggleHealth($index)" ng-show="recipe.healthLabels.length>0">
+            <ng-md-icon icon="keyboard_arrow_right" ng-show="rc.toggleState[$index].Health"></ng-md-icon>Health Info</md-button>
+          <md-button ng-click="rc.toggleDiet($index)" ng-show="recipe.dietLabels.length>0">
+            <ng-md-icon icon="keyboard_arrow_right" ng-show="rc.toggleState[$index].Diet"></ng-md-icon>Diet Info</md-button>
         </div>
       </md-toolbar>
       <md-card-content style="padding: 0">
@@ -38,7 +46,7 @@
           <md-list id="recipeList" ng-show="rc.toggleState[$index].Ingredients">
             <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines" ng-init="rc.toggleIngredients($index)">{{thing}}</md-list-item>
           </md-list>
-          <md-chips ng-model="recipe.healthLabels" readonly="true" ng-show="rc.toggleState[$index].Health">
+          <md-chips ng-model="recipe.healthLabels" readonly="true" ng-show="rc.toggleState[$index].Health" layout="row" layout-align="space-around center">
             <md-chip-template>{{$chip}}</md-chip-template>
           </md-chips>
           <md-chips ng-model="recipe.dietLabels" readonly="true" ng-show="rc.toggleState[$index].Diet">
