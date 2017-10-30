@@ -7,7 +7,10 @@
 </md-button>
 <md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
   <ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}</md-button>
-<h1 class="pgHead">Pantry</h1>
+<!-- <h1 class="pgHead">Pantry</h1> -->
+<div class="pgHead">
+  <img id="headerImg" src="../../../images/pantry.png">
+</div>
 <section layout="row" ng-init="pc.getFood()">
   <div hide show-gt-sm flex="15"></div>
   <div flex>

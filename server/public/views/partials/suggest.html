@@ -25,14 +25,15 @@
             </div>
             <div flex layout="column" layout-align="start end">
               <div flex="20">
-                <md-button class="md-icon-button" ng-click="favorite(recipe)" class="favIcon" ng-hide="recipe.saved">
+                <md-button class="md-icon-button" ng-click="favorite(recipe)" class="favIcon" ng-hide="recipe.saved || $scope.recipeObject.loading">
                   <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
                   <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="unFavorite(recipe.uri)" class="favIcon" ng-show="recipe.saved">
+                <md-button class="md-icon-button" ng-click="unFavorite(recipe.uri)" class="favIcon" ng-show="recipe.saved" ng-hide="$scope.recipeObject.loading">
                   <md-tooltip md-direction="left">Remove from Favorites</md-tooltip>
                   <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
                 </md-button>
+                <md-progress-circular ng-show="$scope.recipeObject.loading" class="md-hue-2" md-diameter="20px"></md-progress-circular>
               </div>
               <div flex>
                 <p>&nbsp&nbsp View Recipe:<br>

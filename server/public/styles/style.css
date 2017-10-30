@@ -19,6 +19,10 @@ span .md-button {
   text-align: center;
 }
 
+.centerText .md-raised {
+  color: #4CAF50 !important;
+}
+
 #appLogo {
   font-weight: bold;
 }
@@ -61,7 +65,7 @@ span .md-button {
 }
 
 .pgHead {
-  margin: 15px 0px 15px 0px;
+  margin: 15px 0px 0px 0px;
   font-family: Helvetica, sans-serif;
   text-align: center;
   font-size: 72px;
@@ -177,6 +181,10 @@ span .md-button {
 
 .md-chips {
   box-shadow: 0 0px !important;
+}
+
+#headerImg {
+  height: 80px;
 }
 
 /* #recipeList:after {

@@ -6,7 +6,10 @@
 <md-button class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
   <ng-md-icon icon="logout"></ng-md-icon> Log Out {{rc.userObject.name}}
 </md-button>
-<h1 class="pgHead">Saved</h1>
+<!-- <h1 class="pgHead">Saved</h1> -->
+<div class="pgHead">
+  <img id="headerImg" src="../../../images/saved.png">
+</div>
 <section layout="column">
   <md-content layout="row">
     <md-card ng-repeat="recipe in rc.recipeObject.saved | filter:rc.query" class="repeated-item" ng-hide="rc[$index]">
