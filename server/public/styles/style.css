@@ -11,6 +11,11 @@ span .md-button {
   margin: 50px
 }
 
+#noSearch {
+  color: #4CAF50;
+  font-size: 32px;
+}
+
 .capInput {
   text-transform: capitalize;
 }

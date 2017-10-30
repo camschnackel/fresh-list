@@ -4,8 +4,7 @@ myApp.service('RecipeService', function ($http) {
   self.recipeObject = {
     suggested: [],
     saved: [],
-    results: [],
-    loading: false
+    results: []
   }
 
   self.search = function (food) {
@@ -111,14 +110,11 @@ myApp.service('RecipeService', function ($http) {
       } else if (self.recipeObject.results.length > 0) {
         self.updateDiscoverSaves();
       }
-    }).then(function () {
-      self.recipeObject.loading = false;
     })
   }
 
   self.postRecipe = function (recipe) {
     console.log('in postRecipe w/ recipe ->', recipe);
-    self.recipeObject.loading = true;
 
     $http({
       method: 'POST',
@@ -131,7 +127,6 @@ myApp.service('RecipeService', function ($http) {
 
   self.deleteRecipe = function (uri) {
     console.log('in deleteRecipe w/ uri ->', uri);
-    self.recipeObject.loading = true;
 
     uri = uri.slice(44);
     // API uses URI for ID and this URI breaks the DELETE route due to being passed on its URL
@@ -152,7 +147,6 @@ myApp.service('RecipeService', function ($http) {
 
   self.deleteRecipeStop = function (uri) {
     console.log('in deleteRecipeStop w/ uri ->', uri);
-    self.recipeObject.loading = true;
 
     uri = uri.slice(44);
     // API uses URI for ID and this URI breaks the DELETE route due to being passed on its URL

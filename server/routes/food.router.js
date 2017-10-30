@@ -37,7 +37,8 @@ router.post('/', function (req, res) {
           _id: mongoose.Types.ObjectId(),
           qty: req.body.qty,
           name: req.body.name,
-          expiry: req.body.expiry
+          expiry: req.body.expiry,
+          dif: req.body.dif
         }
       }
     },
@@ -63,7 +64,8 @@ router.put('/', function (req, res) {
       $set: {
         "food.$.name": req.body.name,
         "food.$.qty": req.body.qty,
-        "food.$.expiry": req.body.expiry
+        "food.$.expiry": req.body.expiry,
+        "food.$.dif": req.body.dif
       }
     },
     function (err, response) {

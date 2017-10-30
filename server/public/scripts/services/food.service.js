@@ -6,6 +6,14 @@ myApp.service('FoodService', function ($http) {
     food: []
   };
 
+  self.dateDif = function (date) {
+    var date1 = new Date();
+    var date2 = new Date(date);
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+    return diffDays;
+  }
+
   self.getFood = function () {
     console.log('in getFood');
     $http({
@@ -17,22 +25,24 @@ myApp.service('FoodService', function ($http) {
       console.log('self.foodObj ->', self.foodObj);
     }).then(function () {
 
-      var dateDif = function (date) {
-        var date1 = new Date();
-        var date2 = new Date(date);
-        var timeDiff = Math.abs(date2.getTime() - date1.getTime());
-        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-        return diffDays;
-      }
+      // var dateDif = function (date) {
+      //   var date1 = new Date();
+      //   var date2 = new Date(date);
+      //   var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+      //   var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+      //   return diffDays;
+      // }
 
       for (var i = 0; i < self.foodObj.food.length; i++) {
-        self.foodObj.food[i].dif = dateDif(self.foodObj.food[i].expiry);
+        self.foodObj.food[i].dif = self.dateDif(self.foodObj.food[i].expiry);
         console.log('self.foodObj.food[i].dif ->', self.foodObj.food[i].dif)
       }
     })
   }
 
   self.postFood = function (objToSend) {
+    objToSend.dif = self.dateDif(objToSend.expiry);
+
     console.log('in postFood');
     return $http({
       method: 'POST',
@@ -42,6 +52,8 @@ myApp.service('FoodService', function ($http) {
   }
 
   self.putFood = function (objToSend) {
+    objToSend.dif = self.dateDif(objToSend.expiry);
+
     console.log('in putFood w/ objToSend ->', objToSend);
     return $http({
       method: 'PUT',
