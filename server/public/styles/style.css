@@ -189,11 +189,18 @@ span .md-button {
   stroke: #f06292;
 }
 
-.pinkLoad svg {
+.favDiv .pinkLoad svg {
   position: absolute;
   overflow: visible;
   top: 7px;
   left: -15px;
+}
+
+md-card .pinkLoad svg {
+  position: absolute;
+  overflow: visible;
+  top: 10px;
+  left: 16px;
 }
 
 .favDiv .md-button {

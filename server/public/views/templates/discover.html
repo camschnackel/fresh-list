@@ -25,6 +25,7 @@
                 <md-tooltip md-direction="top">Remove from Favorites</md-tooltip>
                 <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
             </md-button>
+            <md-progress-circular md-mode="indeterminate" md-diameter="20px" class="pinkLoad" ng-show="loading"></md-progress-circular>
             <md-card-title>
                 <md-card-title-text class="mrgnTp" style="max-height: 139px; overflow: scroll">
                     <span class="md-headline">{{recipe.label}}</span>
