@@ -192,6 +192,19 @@ span .md-button {
 .pinkLoad svg {
   position: absolute;
   overflow: visible;
-  top: -30px;
-  left: 16px;
+  top: 7px;
+  left: -15px;
+}
+
+.favDiv .md-button {
+  min-height: 20px;
+}
+
+.favDiv .md-button.md-icon-button {
+  height: 30px;
+  padding: 0;
+}
+
+.favDiv.flex-25 {
+  min-height: 32px;
 }
