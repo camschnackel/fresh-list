@@ -7,6 +7,7 @@ myApp.controller('DiscoverController', function (UserService, RecipeService, $sc
     vm.toggleState = {};
     vm.hideCard = {};
     vm.query = '';
+    RecipeService.recipeObject.suggested = '';
 
     vm.toggleIngredients = function (index) {
         vm.toggleState[index] = {};

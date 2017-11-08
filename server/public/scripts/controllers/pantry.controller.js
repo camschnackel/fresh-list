@@ -81,6 +81,7 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
 
     $scope.recipeObject = RecipeService.recipeObject;
     console.log('$scope.recipeObject ->', $scope.recipeObject);
+    $scope.loading = false;
     
 
     $scope.hide = function () {
@@ -96,13 +97,19 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
     };
 
     $scope.favorite = function (recipe) {
+      $scope.loading = true;
       console.log('favorite clicked w/ ->', recipe);
-      RecipeService.postRecipe(recipe);
+      RecipeService.postRecipe(recipe).then(function () {
+        $scope.loading = false;
+      })
     };
 
     $scope.unFavorite = function (id) {
+      $scope.loading = true;
       console.log('unFavorite clicked w/ ->', id);
-      RecipeService.deleteRecipe(id);
+      RecipeService.deleteRecipe(id).then(function () {
+        $scope.loading = false;
+      });
     };
 
     $scope.selectedTab = '';

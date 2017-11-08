@@ -25,20 +25,23 @@
             </div>
             <div flex layout="column" layout-align="start end">
               <div flex="20">
-                <md-button class="md-icon-button" ng-click="favorite(recipe)" class="favIcon" ng-hide="recipe.saved">
+                <md-button class="md-icon-button" ng-click="favorite(recipe)" ng-show="!(recipe.saved) && !loading">
                   <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
                   <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="unFavorite(recipe.uri)" class="favIcon" ng-show="recipe.saved">
+                <md-button class="md-icon-button" ng-click="unFavorite(recipe.uri)" ng-show="recipe.saved && !loading">
                   <md-tooltip md-direction="left">Remove from Favorites</md-tooltip>
                   <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
                 </md-button>
+                <md-progress-circular md-mode="indeterminate" md-diameter="20px" class="pinkLoad" ng-show="loading"></md-progress-circular>
               </div>
               <div flex>
-                <p>&nbsp&nbsp View Recipe:<br>
+                <p>&nbsp&nbsp View Recipe:
+                  <br>
                   <md-button class="md-primary" ng-href="{{recipe.url}}" target="_blank">
                     <md-tooltip md-direction="left">Opens Recipe Site in New Tab</md-tooltip>
-                    {{recipe.source}} <ng-md-icon icon="exit_to_app" style="fill: #4CAF50"></ng-md-icon>
+                    {{recipe.source}}
+                    <ng-md-icon icon="exit_to_app" style="fill: #4CAF50"></ng-md-icon>
                   </md-button>
                 </p>
               </div>
@@ -48,7 +51,7 @@
             <div flex>
               <md-list>
                 <p>Ingredients:&nbsp</p>
-                <md-list-item  class="md-1-line" ng-repeat="thing in recipe.ingredientLines">{{thing}}</md-list-item>
+                <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines">{{thing}}</md-list-item>
               </md-list>
             </div>
             <div flex="50" layout="row" layout-align="center start">

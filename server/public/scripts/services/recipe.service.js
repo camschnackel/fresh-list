@@ -116,7 +116,7 @@ myApp.service('RecipeService', function ($http) {
   self.postRecipe = function (recipe) {
     console.log('in postRecipe w/ recipe ->', recipe);
 
-    $http({
+    return $http({
       method: 'POST',
       url: '/recipe',
       data: recipe
@@ -133,7 +133,7 @@ myApp.service('RecipeService', function ($http) {
     // To remedy this, I slice the first many characters off and keep just the identifying piece
 
 
-    $http({
+    return $http({
       method: 'DELETE',
       url: '/recipe/' + uri
       // data: objToSend
