@@ -99,17 +99,17 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
     $scope.favorite = function (recipe) {
       $scope.loading = true;
       console.log('favorite clicked w/ ->', recipe);
-      RecipeService.postRecipe(recipe).then(function () {
+      RecipeService.postRecipe(recipe).then(setTimeout(function () {
         $scope.loading = false;
-      })
+      }), 3000);
     };
 
     $scope.unFavorite = function (id) {
       $scope.loading = true;
       console.log('unFavorite clicked w/ ->', id);
-      RecipeService.deleteRecipe(id).then(function () {
+      RecipeService.deleteRecipe(id).then(setTimeout(function () {
         $scope.loading = false;
-      });
+      }), 3000);
     };
 
     $scope.selectedTab = '';
