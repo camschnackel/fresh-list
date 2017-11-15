@@ -7,24 +7,37 @@ myApp.controller('RecipeController', function (UserService, RecipeService, $scop
     vm.toggleState = {};
     vm.hideCard = {};
     vm.query = '';
+    console.log('vm.recipeObject ->', vm.recipeObject);
+
+    // vm.setDefaultToggle = function () {
+    //     console.log('setDefaultToggle ran, vm.recipeObject.saved ->', vm.recipeObject.saved);
+        
+    //     for (var i = 0; i < vm.recipeObject.saved.length; i++) {
+    //         vm.recipeObject.saved[i].toggleState.Ingredients = true;
+    //         vm.recipeObject.saved[i].toggleState.Health = false;
+    //         vm.recipeObject.saved[i].toggleState.Diet = false;
+    //         console.log('vm.recipeObject.saved[i].toggleState ->', vm.recipeObject.saved[i].toggleState);
+            
+    //     }
+    // }
 
     vm.toggleIngredients = function (index) {
-        vm.toggleState[index]= {};
-        vm.toggleState[index].Ingredients = true;
-        vm.toggleState[index].Health = false;
-        vm.toggleState[index].Diet = false;
+        vm.recipeObject.saved[index].toggleState = {};
+        vm.recipeObject.saved[index].toggleState.Ingredients = true;
+        vm.recipeObject.saved[index].toggleState.Health = false;
+        vm.recipeObject.saved[index].toggleState.Diet = false;
     }
     vm.toggleHealth = function (index) {
-        vm.toggleState[index] = {};
-        vm.toggleState[index].Ingredients = false;
-        vm.toggleState[index].Health = true;
-        vm.toggleState[index].Diet = false;
+        vm.recipeObject.saved[index].toggleState = {};
+        vm.recipeObject.saved[index].toggleState.Ingredients = false;
+        vm.recipeObject.saved[index].toggleState.Health = true;
+        vm.recipeObject.saved[index].toggleState.Diet = false;
     }
     vm.toggleDiet = function (index) {
-        vm.toggleState[index] = {};
-        vm.toggleState[index].Ingredients = false;
-        vm.toggleState[index].Health = false;
-        vm.toggleState[index].Diet = true;
+        vm.recipeObject.saved[index].toggleState = {};
+        vm.recipeObject.saved[index].toggleState.Ingredients = false;
+        vm.recipeObject.saved[index].toggleState.Health = false;
+        vm.recipeObject.saved[index].toggleState.Diet = true;
     }
 
     vm.getSaved = function () {
