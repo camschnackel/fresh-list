@@ -1,15 +1,26 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<md-input-container class="md-block searchBox" flex-gt-sm="" md-no-float="true">
+<md-input-container hide show-gt-md class="md-block searchBox" flex-gt-sm="" md-no-float="true">
     <input name="search" type="string" ng-model="dc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Find New Recipes">
 </md-input-container>
-<md-button class="md-icon-button goBtn" ng-click="">
+<md-button hide show-gt-md class="md-icon-button goBtn" ng-click="">
     <ng-md-icon icon="search" ng-click="dc.search()"></ng-md-icon>
 </md-button>
-<md-button class="md-raised md-warn" id="logOut" ng-click="dc.userService.logout()">
+<md-button hide show-gt-sm class="md-raised md-warn" id="logOut" ng-click="dc.userService.logout()">
     <ng-md-icon icon="logout"></ng-md-icon> Log Out {{dc.userObject.name}}</md-button>
+<md-button hide show-xs show-sm class="md-raised md-warn" id="logOut" ng-click="dc.userService.logout()">
+    Logout
+</md-button>
 <!-- <h1 class="pgHead">Discover</h1> -->
-<div class="pgHead">
+<div hide show-gt-xs class="pgHead">
     <img id="headerImg" src="../../../images/discover.png">
+</div>
+<div hide show-xs show-sm show-md layout="row" layout-align="center center">
+    <md-input-container class="md-block searchBoxMobile" md-no-float="true">
+        <input name="search" type="string" ng-model="dc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search New Recipes">
+    </md-input-container>
+    <md-button hide show-xs show-sm class="md-icon-button" ng-click="">
+        <ng-md-icon icon="search" ng-click="dc.search()"></ng-md-icon>
+    </md-button>
 </div>
 <div ng-hide="dc.query.length > 1 || dc.recipeObject.results.length > 1">
     <h3 class="brand" id="noSearch">Nothing to see here yet, search for something!</h4>

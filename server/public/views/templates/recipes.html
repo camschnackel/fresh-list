@@ -1,19 +1,28 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<md-input-container class="md-block searchBox" flex-gt-sm="" md-no-float="true">
+<md-input-container hide show-gt-md class="md-block searchBox" flex-gt-sm="" md-no-float="true">
   <input name="search" type="string" ng-model="rc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Saved Recipes">
 </md-input-container>
-<md-button class="md-icon-button goBtn" ng-click="">
+<md-button  hide show-gt-mdclass="md-icon-button goBtn" ng-click="">
   <ng-md-icon icon="search"></ng-md-icon>
 </md-button>
 <md-button hide show-gt-sm class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
   <ng-md-icon icon="logout"></ng-md-icon> Log Out {{rc.userObject.name}}
 </md-button>
 <md-button hide show-xs show-sm class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
-  <ng-md-icon icon="logout"></ng-md-icon>
+  Logout
 </md-button>
 <!-- <h1 class="pgHead">Saved</h1> -->
-<div class="pgHead">
+<div  hide show-gt-xs class="pgHead">
   <img id="headerImg" src="../../../images/saved.png">
+</div>
+<div hide show-xs show-sm show-md layout="row" layout-align="center center">
+  <md-input-container class="md-block searchBoxMobile" md-no-float="true">
+    <input name="search" type="string" ng-model="rc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Saved Recipes">
+  </md-input-container>
+  <md-button class="md-icon-button" ng-click="">
+    <ng-md-icon icon="search"></ng-md-icon>
+    <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
+  </md-button>
 </div>
 <section layout="column">
   <md-content layout="row">

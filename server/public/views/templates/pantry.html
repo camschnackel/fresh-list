@@ -41,8 +41,12 @@
 old nav end -->
 <div hide show-xs show-sm show-md layout="row" layout-align="center center" ng-show="pc.mobileSearch">
   <md-input-container class="md-block searchBoxMobile" md-no-float="true">
-    <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Instant Search Pantry">
+    <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
   </md-input-container>
+  <md-button class="md-icon-button" ng-click="">
+    <ng-md-icon icon="search"></ng-md-icon>
+    <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
+  </md-button>
   <!-- <md-button class="md-icon-button" ng-click="">
     <ng-md-icon icon="search"></ng-md-icon>
     <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
