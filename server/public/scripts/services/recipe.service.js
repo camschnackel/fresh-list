@@ -90,6 +90,19 @@ myApp.service('RecipeService', function ($http) {
     })
   }
 
+  self.setDefaultToggle = function () {
+    console.log('setDefaultToggle ran, self.recipeObject.saved ->', self.recipeObject.saved);
+    console.log('setDefaultToggle ran, self.recipeObject.saved.length ->', self.recipeObject.saved.length);
+    for (var i = 0; i < self.recipeObject.saved.length; i++) {
+      self.recipeObject.saved[i].toggleState = {};
+      self.recipeObject.saved[i].toggleState.Ingredients = true;
+      self.recipeObject.saved[i].toggleState.Health = false;
+      self.recipeObject.saved[i].toggleState.Diet = false;
+      console.log('self.recipeObject.saved[i].toggleState ->', self.recipeObject.saved[i].toggleState);
+
+    }
+  }
+
   self.getSaved = function () {
     console.log('self.getSaved hit');
     
@@ -110,7 +123,9 @@ myApp.service('RecipeService', function ($http) {
       } else if (self.recipeObject.results.length > 0) {
         self.updateDiscoverSaves();
       }
-    })
+    }).then(function () {
+      self.setDefaultToggle();
+    });
   }
 
   self.postRecipe = function (recipe) {
