@@ -263,3 +263,7 @@ md-input-container.md-block.searchBoxMobile {
 #fltRgt {
   float: right;
 }
+
+.md-display-2.centerText {
+  margin-bottom: 0;
+}

@@ -17,10 +17,13 @@
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Recipe {{$index+1}}" md-on-select="selectedTab=$index" ng-repeat="recipe in recipeObject.suggested | limitTo:5">
         <md-content class="md-padding">
-          <div layout="column" layout-gt-xs="row">
-            <div flex="65" layout="row" layout-align="start center">
-              <h1 class="md-display-2">{{recipe.label}}</h1>
-              <div hide-gt-xs class="favDiv" id="fltRgt">
+          <div hide show-xs layout="column" layout-align="center center">
+            <!-- mobile only -->
+            <div flex="40" layout="row" layout-align="center center">
+              <h1 class="md-display-2 centerText">{{recipe.label}}</h1>
+            </div>
+            <div layout="row" flex="20" layout-align="center center">
+              <div flex="20">
                 <md-button class="md-icon-button" ng-click="favorite(recipe)" ng-show="!(recipe.saved) && !loading">
                   <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
                   <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
@@ -29,13 +32,28 @@
                   <md-tooltip md-direction="left">Remove from Favorites</md-tooltip>
                   <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
                 </md-button>
-                <md-progress-circular md-mode="indeterminate" md-diameter="20px" class="pinkLoad" ng-show="loading"></md-progress-circular>
+              </div>
+              <div flex="80">
+                <p>&nbsp&nbsp View Recipe:
+                  <br>
+                  <md-button class="md-primary" ng-href="{{recipe.url}}" target="_blank">
+                    <md-tooltip md-direction="left">Opens Recipe Site in New Tab</md-tooltip>
+                    {{recipe.source}}
+                    <ng-md-icon icon="exit_to_app" style="fill: #4CAF50"></ng-md-icon>
+                  </md-button>
+                </p>
               </div>
             </div>
-            <div hide-xs flex="5">
+          </div>
+          <div layout="row" hide show-gt-xs>
+            <!-- desktop only -->
+            <div flex="65" layout="row" layout-align="start center">
+              <h1 class="md-display-2">{{recipe.label}}</h1>
+            </div>
+            <div flex="5">
             </div>
             <div flex layout="column" layout-align="start end">
-              <div hide-xs flex="25" class="favDiv">
+              <div flex="25" class="favDiv">
                 <md-button class="md-icon-button" ng-click="favorite(recipe)" ng-show="!(recipe.saved) && !loading">
                   <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
                   <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
@@ -57,9 +75,37 @@
                 </p>
               </div>
             </div>
-
           </div>
-          <div layout="row">
+          <div hide show-xs layout="column" layout-align="center center">
+            <div flex="25" layout="row" layout-align="center start">
+              <img class="suggestImg" ng-src="{{recipe.image}}">
+            </div>
+            <div flex="50" layout="row" layout-align="start center">
+              <md-list>
+                <p>Ingredients:&nbsp</p>
+                <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines">{{thing}}</md-list-item>
+              </md-list>
+            </div>
+            <div flex="25" layout="row" layout-align="start center">
+              <md-list>
+                <md-list-item class="md-1-line" ng-show="recipe.dietLabels.length>0">
+                  <p>Dietary Info:&nbsp
+                    <span ng-repeat="diet in recipe.dietLabels">{{diet}} </span>
+                  </p>
+                </md-list-item>
+                <md-list-item class="md-1-line" ng-show="recipe.healthLabels.length>0">
+                  <p>Health Info:&nbsp</p>
+                  <md-chips ng-model="recipe.healthLabels" readonly="true">
+                    <md-chip-template>{{$chip}}</md-chip-template>
+                  </md-chips>
+                </md-list-item>
+                <!-- <md-list-item>
+                            <div id="edamam-badge" data-color="transparent"></div>
+                          </md-list-item> -->
+              </md-list>
+            </div>
+          </div>
+          <div hide show-gt-xs layout="row">
             <div flex>
               <md-list>
                 <p>Ingredients:&nbsp</p>
