@@ -5,8 +5,11 @@
 <md-button class="md-icon-button goBtn" ng-click="">
   <ng-md-icon icon="search"></ng-md-icon>
 </md-button>
-<md-button class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
+<md-button hide show-gt-sm class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
   <ng-md-icon icon="logout"></ng-md-icon> Log Out {{rc.userObject.name}}
+</md-button>
+<md-button hide show-xs show-sm class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
+  <ng-md-icon icon="logout"></ng-md-icon>
 </md-button>
 <!-- <h1 class="pgHead">Saved</h1> -->
 <div class="pgHead">

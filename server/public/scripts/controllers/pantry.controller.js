@@ -11,6 +11,7 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
   vm.userObject = UserService.userObject;
   vm.foodObj = FoodService.foodObj;
   vm.dateDefault = new Date();
+  vm.mobileSearch = false;
 
   console.log('vm.userObject ->', vm.userObject);
 
