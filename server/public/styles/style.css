@@ -259,3 +259,7 @@ md-input-container.md-block.searchBoxMobile {
   margin: 0;
   max-height: 30px;
 }
+
+#fltRgt {
+  float: right;
+}

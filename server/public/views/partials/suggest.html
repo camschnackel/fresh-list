@@ -17,14 +17,25 @@
     <md-tabs md-dynamic-height md-border-bottom>
       <md-tab label="Recipe {{$index+1}}" md-on-select="selectedTab=$index" ng-repeat="recipe in recipeObject.suggested | limitTo:5">
         <md-content class="md-padding">
-          <div layout="row">
+          <div layout="column" layout-gt-xs="row">
             <div flex="65" layout="row" layout-align="start center">
               <h1 class="md-display-2">{{recipe.label}}</h1>
+              <div hide-gt-xs class="favDiv" id="fltRgt">
+                <md-button class="md-icon-button" ng-click="favorite(recipe)" ng-show="!(recipe.saved) && !loading">
+                  <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
+                  <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="unFavorite(recipe.uri)" ng-show="recipe.saved && !loading">
+                  <md-tooltip md-direction="left">Remove from Favorites</md-tooltip>
+                  <ng-md-icon icon="favorite" style="fill: #f06292"></ng-md-icon>
+                </md-button>
+                <md-progress-circular md-mode="indeterminate" md-diameter="20px" class="pinkLoad" ng-show="loading"></md-progress-circular>
+              </div>
             </div>
-            <div flex="5">
+            <div hide-xs flex="5">
             </div>
             <div flex layout="column" layout-align="start end">
-              <div flex="25" class="favDiv">
+              <div hide-xs flex="25" class="favDiv">
                 <md-button class="md-icon-button" ng-click="favorite(recipe)" ng-show="!(recipe.saved) && !loading">
                   <md-tooltip md-direction="left">Add to Favorites</md-tooltip>
                   <ng-md-icon icon="favorite_border" style="fill: #f06292"></ng-md-icon>
@@ -46,6 +57,7 @@
                 </p>
               </div>
             </div>
+
           </div>
           <div layout="row">
             <div flex>

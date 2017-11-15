@@ -2,10 +2,10 @@
 <!-- <div layout="row">
   <div hide show-gt-md flex="15"></div>
   <div flex="35" flex-order="3"> -->
-<md-input-container hide show-gt-sm class="md-block searchBox" flex-gt-sm="" md-no-float="true">
+<md-input-container hide show-gt-md class="md-block searchBox" flex-gt-sm="" md-no-float="true">
   <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
 </md-input-container>
-<md-button hide show-gt-sm class="md-icon-button goBtn" ng-click="">
+<md-button hide show-gt-md class="md-icon-button goBtn" ng-click="">
   <ng-md-icon icon="search"></ng-md-icon>
   <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
 </md-button>
@@ -39,7 +39,7 @@
   <img id="headerImg" src="../../../images/pantry.png">
 </div>
 old nav end -->
-<div hide show-xs show-sm layout="row" layout-align="center center" ng-show="pc.mobileSearch">
+<div hide show-xs show-sm show-md layout="row" layout-align="center center" ng-show="pc.mobileSearch">
   <md-input-container class="md-block searchBoxMobile" md-no-float="true">
     <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Instant Search Pantry">
   </md-input-container>
@@ -82,15 +82,15 @@ old nav end -->
             </md-button>
           </div>
           <div layout="row" layout-align="space-around center" flex="30" flex-gt-xs="20">
-            <md-button hide show-gt-xs class="md-raised pantryBtn" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
+            <md-button hide show-gt-md class="md-raised" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
               New
               <ng-md-icon icon="add_circle_outline"></ng-md-icon>
             </md-button>
-            <md-button hide show-xs class="md-icon-button pantryBtn" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
+            <md-button hide show-xs show-sm show-md class="md-icon-button pantryBtn" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
               <md-tooltip md-direction="bottom">New Item</md-tooltip>
               <ng-md-icon icon="add_circle_outline" style="fill: rgb(251, 251, 251)"></ng-md-icon>
             </md-button>
-            <md-button hide show-xs class="md-icon-button pantryBtn" ng-click="pc.mobileSearch = !pc.mobileSearch" ng-show="!pc.addToggle">
+            <md-button hide show-xs show-sm show-md class="md-icon-button pantryBtn" ng-click="pc.mobileSearch = !pc.mobileSearch" ng-show="!pc.addToggle">
               <md-tooltip md-direction="bottom">Toggle Search</md-tooltip>
               <ng-md-icon icon="search" style="fill: rgb(251, 251, 251)"></ng-md-icon>
             </md-button>
