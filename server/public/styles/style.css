@@ -170,6 +170,11 @@ span .md-button {
   margin-right: 8px;
 }
 
+.mrgnTp .md-headline {
+  max-height: 102px;
+  overflow: scroll;
+}
+
 .scrollDiv {
   overflow: scroll;
   /* height: 237px; */
