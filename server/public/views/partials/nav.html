@@ -1,7 +1,30 @@
-<div class="fltLft">
-  <a href="/pantry"><img src="../../images/logo.png"></a>
+<div hide show-xs>
+  <a href="/pantry">
+    <img class="logoImg" src="../../images/logo.png">
+  </a>
 </div>
-<md-content class="md-padding remLftPad">
+<div hide show-gt-xs class="fltLft">
+  <a href="/pantry">
+    <img src="../../images/logo.png">
+  </a>
+</div>
+<md-content hide show-gt-xs class="md-padding remLftPad">
+  <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+    <md-nav-item md-nav-href="/pantry" name="pantry">
+      Pantry
+    </md-nav-item>
+    <md-nav-item md-nav-href="/recipes" name="recipes">
+      Saved
+    </md-nav-item>
+    <md-nav-item md-nav-href="/discover" name="discover">
+      Discover
+    </md-nav-item>
+    <!-- <md-nav-item md-nav-href="/support" name="support">
+      Support
+    </md-nav-item> -->
+  </md-nav-bar>
+</md-content>
+<md-content hide show-xs class="md-padding mobNav" layout="row" layout-align="center center">
   <md-nav-bar md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
     <md-nav-item md-nav-href="/pantry" name="pantry">
       Pantry

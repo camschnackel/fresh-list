@@ -4,7 +4,7 @@ myApp.controller('DiscoverController', function (UserService, RecipeService, $sc
   vm.userService = UserService;
   vm.userObject = UserService.userObject;
   vm.recipeObject = RecipeService.recipeObject;
-  vm.toggleState = {};
+  // vm.toggleState = {};
   vm.hideCard = {};
   vm.query = '';
   vm.loading = false;
@@ -15,22 +15,22 @@ myApp.controller('DiscoverController', function (UserService, RecipeService, $sc
   }
 
   vm.toggleIngredients = function (index) {
-    vm.recipeObject.saved[index] = {};
-    vm.recipeObject.saved[index].Ingredients = true;
-    vm.recipeObject.saved[index].Health = false;
-    vm.recipeObject.saved[index].Diet = false;
+    vm.recipeObject.results[index].toggleState = {};
+    vm.recipeObject.results[index].toggleState.Ingredients = true;
+    vm.recipeObject.results[index].toggleState.Health = false;
+    vm.recipeObject.results[index].toggleState.Diet = false;
   }
   vm.toggleHealth = function (index) {
-    vm.recipeObject.saved[index] = {};
-    vm.recipeObject.saved[index].Ingredients = false;
-    vm.recipeObject.saved[index].Health = true;
-    vm.recipeObject.saved[index].Diet = false;
+    vm.recipeObject.results[index].toggleState = {};
+    vm.recipeObject.results[index].toggleState.Ingredients = false;
+    vm.recipeObject.results[index].toggleState.Health = true;
+    vm.recipeObject.results[index].toggleState.Diet = false;
   }
   vm.toggleDiet = function (index) {
-    vm.recipeObject.saved[index] = {};
-    vm.recipeObject.saved[index].Ingredients = false;
-    vm.recipeObject.saved[index].Health = false;
-    vm.recipeObject.saved[index].Diet = true;
+    vm.recipeObject.results[index].toggleState = {};
+    vm.recipeObject.results[index].toggleState.Ingredients = false;
+    vm.recipeObject.results[index].toggleState.Health = false;
+    vm.recipeObject.results[index].toggleState.Diet = true;
   }
 
   vm.getSaved = function () {
@@ -41,13 +41,19 @@ myApp.controller('DiscoverController', function (UserService, RecipeService, $sc
   vm.favorite = function (recipe) {
     vm.loading = true;
     console.log('favorite clicked w/ ->', recipe);
-    RecipeService.postRecipe(recipe).then(vm.stopLoad());
+    RecipeService.postRecipe(recipe).then(function () {
+      vm.stopLoad();
+      console.log('vm.recipeObject ->', vm.recipeObject);
+    });
   };
 
   vm.unFavorite = function (id) {
     vm.loading = true;
     console.log('unFavorite clicked w/ ->', id);
-    RecipeService.deleteRecipe(id).then(vm.stopLoad());
+    RecipeService.deleteRecipe(id).then(function () {
+      vm.stopLoad();
+      console.log('vm.recipeObject ->', vm.recipeObject);
+    });
   };
 
   vm.search = function () {

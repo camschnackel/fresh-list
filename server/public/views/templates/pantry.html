@@ -2,19 +2,22 @@
 <!-- <div layout="row">
   <div hide show-gt-md flex="15"></div>
   <div flex="35" flex-order="3"> -->
-<md-input-container class="md-block searchBox" flex-gt-sm="" md-no-float="true">
+<md-input-container hide show-gt-md class="md-block searchBox" flex-gt-sm="" md-no-float="true">
   <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
 </md-input-container>
-<md-button class="md-icon-button goBtn" ng-click="">
+<md-button hide show-gt-md class="md-icon-button goBtn" ng-click="">
   <ng-md-icon icon="search"></ng-md-icon>
   <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
 </md-button>
-</div>
-<md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
-  <ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}</md-button>
+<md-button hide show-gt-sm class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
+  <ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}
+</md-button>
+<md-button hide show-xs show-sm class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
+  Logout
+</md-button>
 <!-- <h1 class="pgHead">Pantry</h1> -->
 <!-- <div flex="40" flex-order="2"> -->
-<div class="pgHead">
+<div hide show-gt-xs class="pgHead">
   <img id="headerImg" src="../../../images/pantry.png">
 </div>
 <!-- </div>
@@ -36,7 +39,19 @@
   <img id="headerImg" src="../../../images/pantry.png">
 </div>
 old nav end -->
-
+<div hide show-xs show-sm show-md layout="row" layout-align="center center" ng-show="pc.mobileSearch">
+  <md-input-container class="md-block searchBoxMobile" md-no-float="true">
+    <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
+  </md-input-container>
+  <md-button class="md-icon-button" ng-click="">
+    <ng-md-icon icon="search"></ng-md-icon>
+    <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
+  </md-button>
+  <!-- <md-button class="md-icon-button" ng-click="">
+    <ng-md-icon icon="search"></ng-md-icon>
+    <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
+  </md-button> -->
+</div>
 <section layout="row" ng-init="pc.getFood()">
   <div hide show-gt-md flex="15"></div>
   <div flex>
@@ -44,36 +59,44 @@ old nav end -->
       <md-toolbar>
         <div class="md-toolbar-tools" layout="row">
           <div class="leftText" flex="15">
-            <md-button ng-show="pc.sortMethod!=='qty'" ng-click="pc.sort('qty')">Qty</md-button>
-            <md-button ng-show="pc.sortMethod=='qty' && pc.reverse == true" ng-click="pc.sort('qty')">Qty
+            <md-button class="pantryBtn" ng-show="pc.sortMethod!=='qty'" ng-click="pc.sort('qty')">Qty</md-button>
+            <md-button class="pantryBtn" ng-show="pc.sortMethod=='qty' && pc.reverse == true" ng-click="pc.sort('qty')">Qty
               <ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon>
             </md-button>
-            <md-button ng-show="pc.sortMethod=='qty' && pc.reverse == false" ng-click="pc.sort('qty')">Qty
+            <md-button class="pantryBtn" ng-show="pc.sortMethod=='qty' && pc.reverse == false" ng-click="pc.sort('qty')">Qty
               <ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon>
             </md-button>
           </div>
-          <div class="leftText" flex="50">
-            <md-button ng-show="pc.sortMethod!=='name'" ng-click="pc.sort('name')">Name</md-button>
-            <md-button ng-show="pc.sortMethod=='name' && pc.reverse == true" ng-click="pc.sort('name')">Name
+          <div class="leftText" flex="30" flex-gt-xs="50">
+            <md-button class="pantryBtn" ng-show="pc.sortMethod!=='name'" ng-click="pc.sort('name')">Name</md-button>
+            <md-button class="pantryBtn" ng-show="pc.sortMethod=='name' && pc.reverse == true" ng-click="pc.sort('name')">Name
               <ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon>
             </md-button>
-            <md-button ng-show="pc.sortMethod=='name' && pc.reverse == false" ng-click="pc.sort('name')">Name
+            <md-button class="pantryBtn" ng-show="pc.sortMethod=='name' && pc.reverse == false" ng-click="pc.sort('name')">Name
               <ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon>
             </md-button>
           </div>
-          <div class="leftText" flex="15">
-            <md-button ng-show="pc.sortMethod!=='dif'" ng-click="pc.sort('dif')">Expiry</md-button>
-            <md-button ng-show="pc.sortMethod=='dif' && pc.reverse == true" ng-click="pc.sort('dif')">Expiry
+          <div class="leftText" flex="25" flex-gt-xs="15">
+            <md-button class="pantryBtn" ng-show="pc.sortMethod!=='dif'" ng-click="pc.sort('dif')">Expiry</md-button>
+            <md-button class="pantryBtn" ng-show="pc.sortMethod=='dif' && pc.reverse == true" ng-click="pc.sort('dif')">Expiry
               <ng-md-icon icon="keyboard_arrow_up" style="fill: green"></ng-md-icon>
             </md-button>
-            <md-button ng-show="pc.sortMethod=='dif' && pc.reverse == false" ng-click="pc.sort('dif')">Expiry
+            <md-button class="pantryBtn" ng-show="pc.sortMethod=='dif' && pc.reverse == false" ng-click="pc.sort('dif')">Expiry
               <ng-md-icon icon="keyboard_arrow_down" style="fill: green"></ng-md-icon>
             </md-button>
           </div>
-          <div class="centerText" flex="20">
-            <md-button class="md-raised" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
+          <div layout="row" layout-align="space-around center" flex="30" flex-gt-xs="20">
+            <md-button hide show-gt-md class="md-raised" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
               New
               <ng-md-icon icon="add_circle_outline"></ng-md-icon>
+            </md-button>
+            <md-button hide show-xs show-sm show-md class="md-icon-button pantryBtn" ng-click="pc.addToggle=true; pc.cancelEdit()" ng-show="!pc.addToggle">
+              <md-tooltip md-direction="bottom">New Item</md-tooltip>
+              <ng-md-icon icon="add_circle_outline" style="fill: rgb(251, 251, 251)"></ng-md-icon>
+            </md-button>
+            <md-button hide show-xs show-sm show-md class="md-icon-button pantryBtn" ng-click="pc.mobileSearch = !pc.mobileSearch" ng-show="!pc.addToggle">
+              <md-tooltip md-direction="bottom">Toggle Search</md-tooltip>
+              <ng-md-icon icon="search" style="fill: rgb(251, 251, 251)"></ng-md-icon>
             </md-button>
           </div>
         </div>
@@ -87,22 +110,22 @@ old nav end -->
                   <input md-maxlength="20" name="qtyField" ng-model="pc.pantryAdd.qty" required>
                 </md-input-container>
               </div>
-              <div flex="50" class="md-list-item-text">
+              <div flex="30" flex-gt-xs="50" class="md-list-item-text">
                 <md-input-container class="inputCon">
                   <input md-maxlength="50" name="nameField" ng-model="pc.pantryAdd.name" required>
                 </md-input-container>
               </div>
-              <div flex="15" class="md-list-item-text">
+              <div flex="25" flex-gt-xs="15" class="md-list-item-text">
                 <md-input-container class="inputCon">
                   <md-datepicker valid="" md-hide-icons="calendar" name="dateField" ng-model="pc.pantryAdd.expiry" required></md-datepicker>
                 </md-input-container>
               </div>
-              <div flex="20" class="md-list-item-text centerText">
-                <md-button class="md-icon-button" type="submit">
+              <div flex="30" flex-gt-xs="20" class="md-list-item-text" layout="row" layout-align="space-around center">
+                <md-button class="md-icon-button pantryBtn" type="submit">
                   <md-tooltip md-direction="bottom">Add to Pantry</md-tooltip>
                   <ng-md-icon icon="add_circle" style="fill: #4CAF50"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="pc.addToggle=false" ng-show="pc.addToggle">
+                <md-button class="md-icon-button pantryBtn" ng-click="pc.addToggle=false" ng-show="pc.addToggle">
                   <md-tooltip md-direction="bottom">Cancel</md-tooltip>
                   <ng-md-icon icon="cancel" style="fill: #F44336"></ng-md-icon>
                 </md-button>
@@ -110,7 +133,7 @@ old nav end -->
             </md-list-item>
           </form>
           <form name="foodEditForm" ng-repeat="food in pc.foodObj.food | orderBy:pc.sortMethod:pc.reverse | filter:pc.query" ng-submit="pc.editFood(food.name)">
-            <md-list-item class="md-2-line" layout="row">
+            <md-list-item class="md-2-line wrapList" layout="row">
               <div ng-hide="pc.editToggle === $index" flex="15" class="md-list-item-text">{{food.qty}}</div>
               <div ng-show="pc.editToggle === $index" flex="15" class="md-list-item-text">
                 <md-input-container class="inputCon">
@@ -119,40 +142,40 @@ old nav end -->
                   <!-- ng-value="food.qty" -->
                 </md-input-container>
               </div>
-              <div ng-hide="pc.editToggle === $index" flex="50" class="md-list-item-text">{{food.name}}</div>
-              <div ng-show="pc.editToggle === $index" flex="50" class="md-list-item-text">
+              <div ng-hide="pc.editToggle === $index" flex="30" flex-gt-xs="50" class="md-list-item-text">{{food.name}}</div>
+              <div ng-show="pc.editToggle === $index" flex="30" flex-gt-xs="50" class="md-list-item-text">
                 <md-input-container class="inputCon">
                   <label>{{food.name}}</label>
                   <input md-maxlength="50" name="nameField" ng-model="pc.pantryEdit.name" required>
                 </md-input-container>
               </div>
-              <div ng-hide="pc.editToggle === $index" flex="15" class="md-list-item-text">{{food.expiry}}</div>
-              <div ng-show="pc.editToggle === $index" flex="15" class="md-list-item-text">
+              <div ng-hide="pc.editToggle === $index" flex="25" flex-gt-xs="15" class="md-list-item-text">{{food.expiry}}</div>
+              <div ng-show="pc.editToggle === $index" flex="25" flex-gt-xs="15" class="md-list-item-text">
                 <md-input-container class="inputCon">
                   <label>{{food.expiry}}</label>
                   <md-datepicker valid="" md-hide-icons="calendar" name="dateField" ng-model="pc.pantryEdit.expiry" required></md-datepicker>
                 </md-input-container>
               </div>
-              <div ng-hide="pc.editToggle === $index" flex="20" class="md-list-item-text centerText">
-                <md-button class="md-icon-button" ng-click="pc.suggestDialog($event, food.name)">
+              <div ng-hide="pc.editToggle === $index" flex="30" flex-gt-xs="20" class="md-list-item-text" layout="row" layout-align="space-around center">
+                <md-button class="md-icon-button pantryBtn" ng-click="pc.suggestDialog($event, food.name)">
                   <md-tooltip md-direction="bottom">Recipe Suggestion</md-tooltip>
                   <ng-md-icon icon="restaurant" style="fill: #FF9800"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="pc.editToggle = $index">
+                <md-button class="md-icon-button pantryBtn" ng-click="pc.editToggle = $index">
                   <md-tooltip md-direction="bottom">Edit</md-tooltip>
                   <ng-md-icon icon="mode_edit" style="fill: #2196F3"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="pc.deleteFood(food._id)">
+                <md-button class="md-icon-button pantryBtn" ng-click="pc.deleteFood(food._id)">
                   <md-tooltip md-direction="bottom">Delete</md-tooltip>
                   <ng-md-icon icon="delete" style="fill: #F44336"></ng-md-icon>
                 </md-button>
               </div>
-              <div ng-show="pc.editToggle === $index" flex="20" class="md-list-item-text centerText">
-                <md-button class="md-icon-button" type="submit">
+              <div ng-show="pc.editToggle === $index" flex="30" flex-gt-xs="20" class="md-list-item-text" layout="row" layout-align="space-around center">
+                <md-button class="md-icon-button pantryBtn" type="submit">
                   <md-tooltip md-direction="bottom">Save Changes</md-tooltip>
                   <ng-md-icon icon="save" style="fill: #4CAF50"></ng-md-icon>
                 </md-button>
-                <md-button class="md-icon-button" ng-click="pc.editToggle = -1">
+                <md-button class="md-icon-button pantryBtn" ng-click="pc.editToggle = -1">
                   <md-tooltip md-direction="bottom">Cancel</md-tooltip>
                   <ng-md-icon icon="cancel" style="fill: #F44336"></ng-md-icon>
                 </md-button>
