@@ -6,6 +6,40 @@ span .md-button {
   background-color: rgba(255, 255, 255, 0);
 }
 
+a:link {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+a.aboutLink {
+  text-decoration: none;
+  color: #4CAF50;
+}
+
+div a ng-md-button {
+  height: 64px;
+  width: 64px;
+}
+
+#aboutHead {
+  margin: 0;
+}
+
 .brand {
   margin: 12px;
 }
@@ -22,6 +56,7 @@ span .md-button {
 #noSearch {
   color: #4CAF50;
   font-size: 32px;
+  text-align: center;
 }
 
 .capInput {
@@ -279,4 +314,8 @@ md-input-container.md-block.searchBoxMobile {
 
 .mobNav {
   padding: 4px;
+}
+
+.copyRight {
+  margin: 30px 0 10px 0;
 }

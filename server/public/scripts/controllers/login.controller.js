@@ -1,6 +1,7 @@
-myApp.controller('LoginController', function($http, $location, UserService) {
+myApp.controller('LoginController', function($http, $location, $scope, UserService) {
     console.log('LoginController created');
     var vm = this;
+    $scope.about = true;
 
     vm.user = {
       name: '',

@@ -1,6 +1,7 @@
 myApp.controller('PantryController', function (UserService, FoodService, RecipeService, $scope, $filter, $mdDialog) {
   console.log('PantryController created');
   $scope.currentNavItem = 'pantry';
+  $scope.about = true;
 
   var vm = this;
   vm.addToggle = false;
