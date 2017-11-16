@@ -32,6 +32,8 @@ myApp.service('RecipeService', function ($http) {
       console.log('self.results->', self.recipeObject.results);
     }).then(function () {
       self.updateDiscoverSaves();
+    }).then(function () {
+      self.setDefaultToggle(self.recipeObject.results);
     })
   }
 
@@ -90,17 +92,19 @@ myApp.service('RecipeService', function ($http) {
     })
   }
 
-  self.setDefaultToggle = function () {
-    console.log('setDefaultToggle ran, self.recipeObject.saved ->', self.recipeObject.saved);
-    console.log('setDefaultToggle ran, self.recipeObject.saved.length ->', self.recipeObject.saved.length);
-    for (var i = 0; i < self.recipeObject.saved.length; i++) {
-      self.recipeObject.saved[i].toggleState = {};
-      self.recipeObject.saved[i].toggleState.Ingredients = true;
-      self.recipeObject.saved[i].toggleState.Health = false;
-      self.recipeObject.saved[i].toggleState.Diet = false;
-      console.log('self.recipeObject.saved[i].toggleState ->', self.recipeObject.saved[i].toggleState);
+  self.setDefaultToggle = function (myArray) {
+    console.log('setDefaultToggle ran, myArray ->', myArray);
+    console.log('setDefaultToggle ran, myArray.length ->', myArray.length);
+    for (var i = 0; i < myArray.length; i++) {
+      myArray[i].toggleState = {};
+      myArray[i].toggleState.Ingredients = true;
+      myArray[i].toggleState.Health = false;
+      myArray[i].toggleState.Diet = false;
+      console.log('self.recipeObject.?.toggleState ->', myArray[i].toggleState);
 
     }
+    console.log('myArray after setDefault ->', myArray);
+    
   }
 
   self.getSaved = function () {
@@ -122,9 +126,10 @@ myApp.service('RecipeService', function ($http) {
         self.updateSaves();
       } else if (self.recipeObject.results.length > 0) {
         self.updateDiscoverSaves();
-      }
-    }).then(function () {
-      self.setDefaultToggle();
+        self.setDefaultToggle(self.recipeObject.results);
+        }
+      }).then(function () {
+      self.setDefaultToggle(self.recipeObject.saved);
     });
   }
 

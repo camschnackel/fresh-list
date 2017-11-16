@@ -51,23 +51,23 @@
       <md-toolbar class="md-primary">
         <div class="md-toolbar-tools" layout-align="space-around center">
           <md-button ng-click="rc.toggleIngredients($index)">
-            <ng-md-icon icon="keyboard_arrow_right" ng-show="rc.recipeObject.saved[$index].toggleState.Ingredients"></ng-md-icon>Ingredients</md-button>
+            <ng-md-icon icon="keyboard_arrow_right" ng-show="recipe.toggleState.Ingredients"></ng-md-icon>Ingredients</md-button>
           <md-button ng-click="rc.toggleHealth($index)" ng-show="recipe.healthLabels.length>0">
-            <ng-md-icon icon="keyboard_arrow_right" ng-show="rc.recipeObject.saved[$index].toggleState.Health"></ng-md-icon>Health Info</md-button>
+            <ng-md-icon icon="keyboard_arrow_right" ng-show="recipe.toggleState.Health"></ng-md-icon>Health Info</md-button>
           <md-button ng-click="rc.toggleDiet($index)" ng-show="recipe.dietLabels.length>0">
-            <ng-md-icon icon="keyboard_arrow_right" ng-show="rc.recipeObject.saved[$index].toggleState.Diet"></ng-md-icon>Diet Info</md-button>
+            <ng-md-icon icon="keyboard_arrow_right" ng-show="recipe.toggleState.Diet"></ng-md-icon>Diet Info</md-button>
         </div>
       </md-toolbar>
       <md-card-content style="padding: 0">
         <div class="scrollDiv">
-          <md-list id="recipeList" ng-show="rc.recipeObject.saved[$index].toggleState.Ingredients">
+          <md-list id="recipeList" ng-show="recipe.toggleState.Ingredients">
             <!-- <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines track by $index" ng-init="rc.toggleIngredients($index)">{{thing}}</md-list-item> -->
             <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines track by $index">{{thing}}</md-list-item>
           </md-list>
-          <md-chips ng-model="recipe.healthLabels" readonly="true" ng-show="rc.recipeObject.saved[$index].toggleState.Health" layout="row" layout-align="space-around center">
+          <md-chips ng-model="recipe.healthLabels" readonly="true" ng-show="recipe.toggleState.Health" layout="row" layout-align="space-around center">
             <md-chip-template>{{$chip}}</md-chip-template>
           </md-chips>
-          <md-chips ng-model="recipe.dietLabels" readonly="true" ng-show="rc.recipeObject.saved[$index].toggleState.Diet">
+          <md-chips ng-model="recipe.dietLabels" readonly="true" ng-show="recipe.toggleState.Diet">
             <md-chip-template>{{$chip}}</md-chip-template>
           </md-chips>
         </div>

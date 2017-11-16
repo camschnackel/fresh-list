@@ -7,8 +7,16 @@ span .md-button {
 }
 
 .brand {
-  text-align: center;
-  margin: 50px
+  margin: 12px;
+}
+
+.homeLogo {
+  height: 142px;
+  margin: 20px;
+}
+
+.homeLogoMob {
+  height: 72px;
 }
 
 #noSearch {
@@ -42,7 +50,8 @@ span .md-button {
 }
 
 .logoImg {
-  height: 60px;
+  height: 48px;
+  margin: 4px 0 0 4px;
 }
 
 .remLftPad {
@@ -266,4 +275,8 @@ md-input-container.md-block.searchBoxMobile {
 
 .md-display-2.centerText {
   margin-bottom: 0;
+}
+
+.mobNav {
+  padding: 4px;
 }
