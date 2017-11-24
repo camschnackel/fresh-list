@@ -41,7 +41,7 @@ Once all dependencies are install, use `npm start` to start the server, which wi
 ## Screen Shot
 
 ![Pantry View](/server/public/images/screen1.png)
-![Recipes View](/images/public/images/screen2.png)
+![Recipes View](/server/public/images/screen2.png)
 
 ### Completed Features
 
