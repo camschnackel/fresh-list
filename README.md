@@ -38,7 +38,7 @@ Fork and clone this repo to your local machine. Make sure to have MongoDB config
 
 Once all dependencies are install, use `npm start` to start the server, which will run on port 5000 by default.
 
-## Screen Shot
+## Screen Shots
 
 ![Pantry View](/server/public/images/screen1.png)
 ![Recipes View](/server/public/images/screen2.png)
