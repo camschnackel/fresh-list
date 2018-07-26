@@ -11,7 +11,6 @@
 <md-button hide show-xs show-sm class="md-raised md-warn" id="logOut" ng-click="rc.userService.logout()">
   Logout
 </md-button>
-<!-- <h1 class="pgHead">Saved</h1> -->
 <div  hide show-gt-xs class="pgHead">
   <img id="headerImg" src="../../../images/saved.png">
 </div>
@@ -61,7 +60,6 @@
       <md-card-content style="padding: 0">
         <div class="scrollDiv">
           <md-list id="recipeList" ng-show="recipe.toggleState.Ingredients">
-            <!-- <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines track by $index" ng-init="rc.toggleIngredients($index)">{{thing}}</md-list-item> -->
             <md-list-item class="md-1-line" ng-repeat="thing in recipe.ingredientLines track by $index">{{thing}}</md-list-item>
           </md-list>
           <md-chips ng-model="recipe.healthLabels" readonly="true" ng-show="recipe.toggleState.Health" layout="row" layout-align="space-around center">

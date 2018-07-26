@@ -1,7 +1,4 @@
 <div ng-include="'views/partials/nav.html'"></div>
-<!-- <div layout="row">
-  <div hide show-gt-md flex="15"></div>
-  <div flex="35" flex-order="3"> -->
 <md-input-container hide show-gt-md class="md-block searchBox" flex-gt-sm="" md-no-float="true">
   <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
 </md-input-container>
@@ -15,30 +12,9 @@
 <md-button hide show-xs show-sm class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
   Logout
 </md-button>
-<!-- <h1 class="pgHead">Pantry</h1> -->
-<!-- <div flex="40" flex-order="2"> -->
 <div hide show-gt-xs class="pgHead">
   <img id="headerImg" src="../../../images/pantry.png">
 </div>
-<!-- </div>
-  <div hide show-gt-md flex="15"></div>
-</div> -->
-
-<!-- old nav start
-<md-input-container class="md-block searchBox" flex-gt-sm="" md-no-float="true">
-  <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
-</md-input-container>
-<md-button class="md-icon-button goBtn" ng-click="">
-  <ng-md-icon icon="search"></ng-md-icon>
-  <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
-</md-button>
-</div>
-<md-button class="md-raised md-warn" id="logOut" ng-click="pc.userService.logout()">
-  <ng-md-icon icon="logout"></ng-md-icon> Log Out {{pc.userObject.name}}</md-button>
-<div class="pgHead">
-  <img id="headerImg" src="../../../images/pantry.png">
-</div>
-old nav end -->
 <div hide show-xs show-sm show-md layout="row" layout-align="center center" ng-show="pc.mobileSearch">
   <md-input-container class="md-block searchBoxMobile" md-no-float="true">
     <input name="search" type="string" ng-model="pc.query" md-no-asterisk="true" md-no-resize="true" placeholder="Search Your Pantry">
@@ -47,10 +23,6 @@ old nav end -->
     <ng-md-icon icon="search"></ng-md-icon>
     <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
   </md-button>
-  <!-- <md-button class="md-icon-button" ng-click="">
-    <ng-md-icon icon="search"></ng-md-icon>
-    <md-tooltip md-direction="top">Instant search is enabled</md-tooltip>
-  </md-button> -->
 </div>
 <section layout="row" ng-init="pc.getFood()">
   <div hide show-gt-md flex="15"></div>
@@ -139,7 +111,6 @@ old nav end -->
                 <md-input-container class="inputCon">
                   <label>{{food.qty}}</label>
                   <input md-maxlength="20" name="qtyField" ng-model="pc.pantryEdit.qty" required>
-                  <!-- ng-value="food.qty" -->
                 </md-input-container>
               </div>
               <div ng-hide="pc.editToggle === $index" flex="30" flex-gt-xs="50" class="md-list-item-text">{{food.name}}</div>

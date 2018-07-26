@@ -1,8 +1,7 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ngMaterial', 'ngMessages', 'ngMdIcons']);
-/// Routes ///
+
 myApp.config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
   $locationProvider.hashPrefix('');
-  console.log('myApp -- config')
   $routeProvider
     .when('/home', {
       templateUrl: '/views/templates/home.html',
@@ -34,22 +33,8 @@ myApp.config(function ($routeProvider, $locationProvider, $mdThemingProvider) {
           return UserService.getuser();
         }
       }
-    }).when('/support', {
-      templateUrl: '/views/templates/support.html',
-      controller: 'SupportController as sc',
-      resolve: {
-        getuser: function (UserService) {
-          return UserService.getuser();
-        }
-      }
     }).when('/about', {
-      templateUrl: '/views/templates/about.html',
-      // controller: 'AboutController as ac',
-      // resolve: {
-      //   getuser: function (UserService) {
-      //     return UserService.getuser();
-      //   }
-      // }
+      templateUrl: '/views/templates/about.html'
     })
     .otherwise({
       redirectTo: '/home'
