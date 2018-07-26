@@ -6,16 +6,9 @@ var Food = require('../models/user.js');
 
 // sends call to recipe API to request suggested recipes based on selected pantry item
 router.get('/suggest', function (req, res) {
-
   var options = {
-    url: 'https://api.edamam.com/search?q=' + req.query.name,
-    method: 'GET',
-    headers: {
-      'app_id': process.env.EDAMOM_ID,
-      'app_key': process.env.EDAMOM_KEY,
-      'from': 0,
-      'to': 2
-    }
+    url: 'https://api.edamam.com/search?q=' + req.query.name + '&app_id=' + process.env.EDAMOM_ID + '&app_key=' + process.env.EDAMOM_KEY + '&from=' + 0 + '&to=' + 10,
+    method: 'GET'
   }
 
   request(options, function (error, response, body) {
@@ -28,14 +21,8 @@ router.get('/suggest', function (req, res) {
 router.get('/search', function (req, res) {
 
   var options = {
-    url: 'https://api.edamam.com/search?q=' + req.query.name,
-    method: 'GET',
-    headers: {
-      'app_id': process.env.EDAMOM_ID,
-      'app_key': process.env.EDAMOM_KEY,
-      'from': 0,
-      'to': 2
-    }
+    url: 'https://api.edamam.com/search?q=' + req.query.name + '&app_id=' + process.env.EDAMOM_ID + '&app_key=' + process.env.EDAMOM_KEY + '&from=' + 0 + '&to=' + 10,
+    method: 'GET'
   }
 
   request(options, function (error, response, body) {
