@@ -4,56 +4,35 @@ var request = require('request');
 var mongoose = require('mongoose');
 var Food = require('../models/user.js');
 
+// sends call to recipe API to request suggested recipes based on selected pantry item
 router.get('/suggest', function (req, res) {
-  console.log('in the recipe suggest get route', req.query);
-
   var options = {
-    url: 'https://api.edamam.com/search?q=' + req.query.name,
-    method: 'GET',
-    headers: {
-      'app_id': process.env.EDAMOM_ID,
-      'app_key': process.env.EDAMOM_KEY,
-      'from': 0,
-      'to': 2
-    }
+    url: 'https://api.edamam.com/search?q=' + req.query.name + '&app_id=' + process.env.EDAMOM_ID + '&app_key=' + process.env.EDAMOM_KEY + '&from=' + 0 + '&to=' + 10,
+    method: 'GET'
   }
 
   request(options, function (error, response, body) {
-    console.log('error:', error); // Print the error if one occurred
-    // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    // console.log('body:', body); // Print the HTML for the Google homepage.
-    // send entire body or parts of it
     res.status(200).send(JSON.parse(body));
   })
 
 })
 
+// send call to recipe API to request recipes based on search performed in discover view
 router.get('/search', function (req, res) {
-  console.log('in the recipe suggest get route', req.query);
 
   var options = {
-    url: 'https://api.edamam.com/search?q=' + req.query.name,
-    method: 'GET',
-    headers: {
-      'app_id': process.env.EDAMOM_ID,
-      'app_key': process.env.EDAMOM_KEY,
-      'from': 0,
-      'to': 2
-    }
+    url: 'https://api.edamam.com/search?q=' + req.query.name + '&app_id=' + process.env.EDAMOM_ID + '&app_key=' + process.env.EDAMOM_KEY + '&from=' + 0 + '&to=' + 10,
+    method: 'GET'
   }
 
   request(options, function (error, response, body) {
-    console.log('error:', error); // Print the error if one occurred
-    // console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    // console.log('body:', body); // Print the HTML for the Google homepage.
-    // send entire body or parts of it
     res.status(200).send(JSON.parse(body));
   })
 
 })
 
+// retrieves all saved recipes for logged in user
 router.get('/', function (req, res) {
-  console.log('in the recipe get route');
 
   Food.find({
       username: req.user.username
@@ -63,17 +42,15 @@ router.get('/', function (req, res) {
     },
     function (err, recipeResults) {
       if (err || recipeResults === undefined) {
-        console.log('Food.find err ->', err);
         res.sendStatus(500);
       } else {
-        console.log('Get Update Added');
         res.send(recipeResults);
       }
     })
 })
 
+// post request to save new recipe
 router.post('/', function (req, res) {
-  console.log('in the recipe post route, req.body ->', req.body);
 
   Food.updateOne({
       username: req.user.username
@@ -94,18 +71,16 @@ router.post('/', function (req, res) {
     },
     function (err, response) {
       if (err) {
-        console.log('Recipe.updateOne err', err);
         res.sendStatus(500);
       } else {
-        console.log('Post Update added');
         res.sendStatus(201);
       }
     }
   );
 })
 
+// delete request to remove previously saved recipe
 router.delete('/:uri', function (req, res) {
-  console.log('in the recipe delete route, req.params ->', req.params);
 
   var uri = 'http://www.edamam.com/ontologies/edamam.owl#';
   uri += req.params.uri; // Adding rest of URI back
@@ -122,10 +97,8 @@ router.delete('/:uri', function (req, res) {
     },
     function (err, response) {
       if (err) {
-        console.log('Recipe.updateOne err', err);
         res.sendStatus(500);
       } else {
-        console.log('Delete Update added');
         res.sendStatus(201);
       }
     }

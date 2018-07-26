@@ -1,5 +1,4 @@
 myApp.service('RecipeService', function ($http) {
-  console.log('in RecipeService');
   var self = this;
   self.recipeObject = {
     suggested: [],
@@ -7,15 +6,14 @@ myApp.service('RecipeService', function ($http) {
     results: []
   }
 
+  // searches for recipes in Edamam API, used in discover view
   self.search = function (food) {
     self.recipeObject.results = [];
-    console.log('in get searched recipes');
 
     return $http({
       method: 'GET',
       url: '/recipe/search?name=' + food
     }).then(function (response) {
-      console.log('Edamom call response ->', response.data);
       for (var i = 0; i < 10; i++) {
         var recipe = {
           label: response.data.hits[i].recipe.label,
@@ -29,7 +27,6 @@ myApp.service('RecipeService', function ($http) {
         }
         self.recipeObject.results.push(recipe);
       }
-      console.log('self.results->', self.recipeObject.results);
     }).then(function () {
       self.updateDiscoverSaves();
     }).then(function () {
@@ -37,11 +34,11 @@ myApp.service('RecipeService', function ($http) {
     })
   }
 
+  // ensures that saved recipes display saved heart
   self.matchSaves = function (uri1) {
     var results = self.recipeObject.saved.filter(function (uri2) {
       return uri2.uri === uri1;
     })
-    console.log('results ->', results);
     if (results.length > 0) {
       return true
     } else {
@@ -49,31 +46,30 @@ myApp.service('RecipeService', function ($http) {
     }
   }
 
+  // updates the saved status of a food item within saved recipes view
   self.updateSaves = function () {
     for (var i = 0; i < self.recipeObject.suggested.length; i++) {
       self.recipeObject.suggested[i].saved = self.matchSaves(self.recipeObject.suggested[i].uri);
     }
-    console.log('self.recipeObject after updateSaves ->', self.recipeObject);
 
   }
 
+  // updates the saved status of a food item within discover recipes view
   self.updateDiscoverSaves = function () {
     for (var i = 0; i < self.recipeObject.results.length; i++) {
       self.recipeObject.results[i].saved = self.matchSaves(self.recipeObject.results[i].uri);
     }
-    console.log('self.recipeObject after updateDiscoverSaves ->', self.recipeObject);
 
   }
 
+  // searches Edamam recipe API for recipes using selected pantry item as search criteria
   self.recipeSuggest = function (food) {
     self.recipeObject.suggested = [];
-    console.log('in get suggested recipes');
 
     return $http({
       method: 'GET',
       url: '/recipe/suggest?name=' + food
     }).then(function (response) {
-      console.log('Edamom call response ->', response.data);
       for (var i = 0; i < 5; i++) {
         var recipe = {
           label: response.data.hits[i].recipe.label,
@@ -88,27 +84,23 @@ myApp.service('RecipeService', function ($http) {
         recipe.saved = self.matchSaves(recipe.uri);
         self.recipeObject.suggested.push(recipe);
       }
-      console.log('self.suggestedRecipes ->', self.recipeObject.suggested);
     })
   }
 
+  // makes sure all recipe cards display ingredients by default
   self.setDefaultToggle = function (myArray) {
-    console.log('setDefaultToggle ran, myArray ->', myArray);
-    console.log('setDefaultToggle ran, myArray.length ->', myArray.length);
     for (var i = 0; i < myArray.length; i++) {
       myArray[i].toggleState = {};
       myArray[i].toggleState.Ingredients = true;
       myArray[i].toggleState.Health = false;
       myArray[i].toggleState.Diet = false;
-      console.log('self.recipeObject.?.toggleState ->', myArray[i].toggleState);
 
     }
-    console.log('myArray after setDefault ->', myArray);
     
   }
 
+  // retrieves saved recipes from database
   self.getSaved = function () {
-    console.log('self.getSaved hit');
     
     self.recipeObject.saved = [];
 
@@ -116,11 +108,9 @@ myApp.service('RecipeService', function ($http) {
       method: 'GET',
       url: '/recipe'
     }).then(function (response) {
-      console.log('in getSaved w/ response.data[0].recipes ->', response.data[0].recipes);
       for (var i = 0; i < response.data[0].recipes.length; i++) {
         self.recipeObject.saved.push(response.data[0].recipes[i]);
       }
-      console.log('self.recipeObject.saved ->', self.recipeObject.saved);
     }).then(function () {
       if (self.recipeObject.suggested.length > 0) {
         self.updateSaves();
@@ -133,8 +123,8 @@ myApp.service('RecipeService', function ($http) {
     });
   }
 
+  // posts recipe data to database when save heart is clicked on an unsaved recipe
   self.postRecipe = function (recipe) {
-    console.log('in postRecipe w/ recipe ->', recipe);
 
     return $http({
       method: 'POST',
@@ -145,8 +135,8 @@ myApp.service('RecipeService', function ($http) {
     })
   }
 
+  // deletes recipe data from database when recipe heart is clicked on a saved recipe
   self.deleteRecipe = function (uri) {
-    console.log('in deleteRecipe w/ uri ->', uri);
 
     uri = uri.slice(44);
     // API uses URI for ID and this URI breaks the DELETE route due to being passed on its URL
@@ -156,17 +146,13 @@ myApp.service('RecipeService', function ($http) {
     return $http({
       method: 'DELETE',
       url: '/recipe/' + uri
-      // data: objToSend
     }).then(function () {
       self.getSaved();
     })
-    // .then(function () {
-    //   self.updateSaves();
-    // })
   }
 
+  // same as above but does not reload recipes to ensure that side-scrolling recipe cards maintain their position
   self.deleteRecipeStop = function (uri) {
-    console.log('in deleteRecipeStop w/ uri ->', uri);
 
     uri = uri.slice(44);
     // API uses URI for ID and this URI breaks the DELETE route due to being passed on its URL

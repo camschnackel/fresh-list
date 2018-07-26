@@ -1,5 +1,4 @@
 myApp.controller('PantryController', function (UserService, FoodService, RecipeService, $scope, $filter, $mdDialog) {
-  console.log('PantryController created');
   $scope.currentNavItem = 'pantry';
   $scope.about = true;
 
@@ -13,8 +12,6 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
   vm.foodObj = FoodService.foodObj;
   vm.dateDefault = new Date();
   vm.mobileSearch = false;
-
-  console.log('vm.userObject ->', vm.userObject);
 
   vm.pantryAdd = {
     qty: '',
@@ -34,7 +31,7 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
     vm.sortMethod = method;
   }
 
-  // function to clear input fields
+  // clears input fields
   vm.resetItems = function () {
     vm.pantryAdd.qty = '';
     vm.pantryAdd.name = '';
@@ -48,17 +45,15 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
     vm.pantryEdit.expiry = '';
   }
 
-  // function to get food items from database
+  // gets food items from database
   vm.getFood = function () {
     FoodService.getFood();
-    console.log('vm.foodObj ->', vm.foodObj);
   }
 
-  // function to add new food item to database
+  // adds new food item to database
   vm.addItem = function () {
     vm.addToggle = false;
     vm.pantryAdd.expiry = $filter('date')(vm.pantryAdd.expiry, "MM/dd/yyyy");
-    console.log('addItem clicked! vm.pantryAdd ->', vm.pantryAdd);
 
     FoodService.postFood(vm.pantryAdd).then(function () {
       vm.resetItems();
@@ -66,8 +61,8 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
     });
   }
 
+  // displays suggested recipe dialog
   vm.suggestDialog = function (ev, food) {
-    console.log('recipeSuggest called with food ->', food);
 
     RecipeService.recipeSuggest(food).then($mdDialog.show({
         controller: DialogController,
@@ -79,10 +74,10 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
       })
     )}
 
+  // controller for vm.suggestDialog
   function DialogController(RecipeService, $scope, $mdDialog) {
 
     $scope.recipeObject = RecipeService.recipeObject;
-    console.log('$scope.recipeObject ->', $scope.recipeObject);
     $scope.loading = false;
     
 
@@ -104,23 +99,19 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
 
     $scope.favorite = function (recipe) {
       $scope.loading = true;
-      console.log('favorite clicked w/ ->', recipe);
       RecipeService.postRecipe(recipe).then($scope.stopLoad());
     };
 
     $scope.unFavorite = function (id) {
       $scope.loading = true;
-      console.log('unFavorite clicked w/ ->', id);
       RecipeService.deleteRecipe(id).then($scope.stopLoad());
-      // RecipeService.deleteRecipe(id).then(setTimeout($scope.stopLoad, 1000));
     };
 
     $scope.selectedTab = '';
   }
 
-  //function to delete item from database
+  // edits pantry item
   vm.editFood = function (food) {
-    console.log('in editFood with food ->', food);
     vm.editToggle = -1;
     vm.pantryEdit.food = food;
     vm.pantryEdit.expiry = $filter('date')(vm.pantryEdit.expiry, "MM/dd/yyyy");
@@ -131,9 +122,8 @@ myApp.controller('PantryController', function (UserService, FoodService, RecipeS
       })
   }
 
-  //function to delete item from database
+  // deletes food from pantry
   vm.deleteFood = function (food) {
-    console.log('in deleteFood with food ->', food);
     FoodService.deleteFood(food).then(function () {
       vm.getFood();
     });

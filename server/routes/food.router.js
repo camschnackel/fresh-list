@@ -4,9 +4,8 @@ var mongoose = require('mongoose');
 var Food = require('../models/user.js');
 var mongodb = require('mongodb');
 
-
+// retrieves pantry items for logged in user from database
 router.get('/', function (req, res) {
-  console.log('in the food get route');
 
   Food.find({
       username: req.user.username
@@ -16,18 +15,15 @@ router.get('/', function (req, res) {
     },
     function (err, foodResults) {
       if (err) {
-        console.log('Food.find err ->', err);
         res.sendStatus(500);
       } else {
-        console.log('Get Update Added');
         res.send(foodResults);
       }
     })
 })
 
+// posts newly created pantry item to database
 router.post('/', function (req, res) {
-  console.log('in food post router, req.body ->', req.body);
-  console.log('in food post router, req.user ->', req.user);
 
   Food.updateOne({
       username: req.user.username
@@ -44,18 +40,16 @@ router.post('/', function (req, res) {
     },
     function (err, response) {
       if (err) {
-        console.log('Food.updateOne err', err);
         res.sendStatus(500);
       } else {
-        console.log('Post Update added');
         res.sendStatus(201);
       }
     }
   );
 });
 
+// puts edited pantry item in database
 router.put('/', function (req, res) {
-  console.log('in food put router, req.body ->', req.body);
 
   Food.update({
       username: req.user.username,
@@ -70,17 +64,15 @@ router.put('/', function (req, res) {
     },
     function (err, response) {
       if (err) {
-        console.log('Food.update err ->', err);
         res.sendStatus(500);
       } else {
-        console.log('Put Update Added');
         res.sendStatus(201);
       }
     })
 })
 
+// deletes pantry item from database
 router.delete('/:food', function (req, res) {
-  console.log('in food delete route with req.params.food ->', req.params.food);
 
   Food.update({
       username: req.user.username
@@ -93,10 +85,8 @@ router.delete('/:food', function (req, res) {
     },
     function (err, response) {
       if (err) {
-        console.log('Food.update err ->', err);
         res.sendStatus(500);
       } else {
-        console.log('Delete Update Added');
         res.sendStatus(201);
       }
     })
