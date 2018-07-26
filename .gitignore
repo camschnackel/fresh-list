@@ -1,4 +1,6 @@
 .DS_STORE
+.vscode/
+dump/
 .env
 node_modules/
 .idea/
