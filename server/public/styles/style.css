@@ -319,3 +319,9 @@ md-input-container.md-block.searchBoxMobile {
 .copyRight {
   margin: 30px 0 10px 0;
 }
+
+::-webkit-scrollbar {
+  display: none;
+  background: transparent;
+  /* make scrollbar transparent */
+}
